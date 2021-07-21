@@ -2,6 +2,7 @@ import {
   Button,
   FormControl,
   Grid,
+  Hidden,
   Input,
   InputLabel,
   makeStyles,
@@ -10,26 +11,44 @@ import { Paper } from "material-ui";
 import { FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { PostData } from "../../Services/ApiService";
+import SignIn from '../../Assets/SignIn.png';
 
 const useStyles = makeStyles({
   header: {
-    backgroundColor: "#3f51b5",
-    color: "White",
-    padding: 1,
+    textAlign:"right",
+    color: "#D36F26",
+    padding: "0 30px",
+    fontSize:"28px",
     marginBottom: 10,
   },
   fullWidth: {
     width: "90%",
+    marginTop:20,
+  },
+  banner:{
+    width:"100%",
+    height:"100%",
+  },
+  paper:{
+    width:"60%",
+    height:"auto",
+    boxShadow:"none !important"
   },
   submitButton: {
     width: "85%",
     marginTop: 40,
     margin: 20,
+    backgroundColor:"#FD7D21",
+    maxWidth:"100px",
+    "&:hover": {
+      backgroundColor:"#DC6945",
+    },
   },
   label: {
     left: "auto",
-    paddingRight: 10,
+    paddingRight: 5,
     right: "0 !important",
+    color: "#FD7D21 !important",
   },
 });
 
@@ -57,40 +76,48 @@ export const Login = () => {
 
   const classes = useStyles();
   return (
-    <Grid xs={11} md={4} lg={3}>
-      <Paper rounded style={{ overflow: "hidden" }}>
-        <Grid className={classes.header}>
-          <h3>الو رتبه</h3>
+    <Grid container>
+        <Grid xs={12} md={6} container alignItems="center" justify="center">
+          <Paper rounded className={classes.paper}>
+            <Grid className={classes.header}>
+              <h3>ورود به الورتبه</h3>
+            </Grid>
+            <Grid>
+              <FormControl className={classes.fullWidth}>
+                <InputLabel className={classes.label}>نام کاربری</InputLabel>
+                <Input
+                  onChange={handleChange}
+                  value={form.userName}
+                  name="userName"
+                />
+              </FormControl>
+            </Grid>
+            <Grid>
+              <FormControl className={classes.fullWidth}>
+                <InputLabel className={classes.label}>رمز ورود</InputLabel>
+                <Input
+                  onChange={handleChange}
+                  value={form.password}
+                  type="password"
+                  name="password"
+                />
+              </FormControl>
+            </Grid>
+            <Button
+              className={classes.submitButton}
+              color="primary"
+              onClick={handleSubmit}
+              variant="contained"
+            >
+              ورود
+            </Button>
+          </Paper>
         </Grid>
-        <Grid>
-          <FormControl className={classes.fullWidth}>
-            <InputLabel className={classes.label}>نام کاربری</InputLabel>
-            <Input
-              onChange={handleChange}
-              value={form.userName}
-              name="userName"
-            />
-          </FormControl>
-        </Grid>
-        <Grid>
-          <FormControl className={classes.fullWidth}>
-            <InputLabel className={classes.label}>رمز ورود</InputLabel>
-            <Input
-              onChange={handleChange}
-              value={form.password}
-              name="password"
-            />
-          </FormControl>
-        </Grid>
-        <Button
-          className={classes.submitButton}
-          color="primary"
-          onClick={handleSubmit}
-          variant="contained"
-        >
-          ورود
-        </Button>
-      </Paper>
+        <Hidden xsDown>
+          <Grid md={6}>
+              <img src={SignIn} alt="signin" className={classes.banner}/>
+          </Grid>
+        </Hidden>
     </Grid>
   );
 };
