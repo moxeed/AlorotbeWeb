@@ -127,12 +127,10 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
   };
   const handleChangeBool = (e: FormEvent<{}>) => {
     const newForm = { ...form };
-    newForm[(e.target as HTMLInputElement).name] = Boolean(
-      (e.target as HTMLInputElement).value
-    );
+    newForm[(e.target as HTMLInputElement).name] =
+      (e.target as HTMLInputElement).value === "true";
     setForm(newForm);
   };
-
   function getSteps() {
     return [" کاربری", " شخصی", " تحصیلی"];
   }
