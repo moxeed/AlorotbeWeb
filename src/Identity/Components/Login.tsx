@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   Button,
   FormControl,
@@ -6,42 +8,36 @@ import {
   Input,
   InputLabel,
   makeStyles,
+  CircularProgress,
 } from "@material-ui/core";
 import { Paper } from "material-ui";
 import { FormEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { PostData } from "../../Services/ApiService";
-import SignIn from '../../Assets/SignIn.png';
+import SignIn from "../../Assets/SignIn.png";
+import { FC } from "react";
 
 const useStyles = makeStyles({
   header: {
-    textAlign:"right",
+    textAlign: "right",
     color: "#D36F26",
     padding: "0 30px",
-    fontSize:"28px",
+    fontSize: "28px",
     marginBottom: 10,
   },
   fullWidth: {
     width: "90%",
-    marginTop:20,
+    marginTop: 20,
   },
-  banner:{
-    width:"100%",
-    height:"100%",
+  banner: {
+    width: "100%",
+    height: "100%",
   },
-  paper:{
-    width:"60%",
-    height:"auto",
-    boxShadow:"none !important"
-  },
-  submitButton: {
-    width: "85%",
-    marginTop: 40,
-    margin: 20,
-    backgroundColor:"#FD7D21",
-    maxWidth:"100px",
-    "&:hover": {
-      backgroundColor:"#DC6945",
+  paper: {
+    width: "70%",
+    height: "auto",
+    boxShadow: "none !important",
+    "@media (max-width: 425px)": {
+      width: "100%",
     },
   },
   label: {
@@ -52,14 +48,19 @@ const useStyles = makeStyles({
   },
 });
 
+interface Props {
+  isDone: boolean;
+  setIsDone: (isDone: boolean) => void;
+}
+
 const initValue: { [index: string]: string } = {
   userName: "",
   password: "",
 };
 
-export const Login = () => {
+export const Login: FC<Props> = ({ isDone, setIsDone, ...props }) => {
   const [form, setForm] = useState(initValue);
-  const history = useHistory();
+  const [isProcessing, setIsProcessing] = useState(false);
   const handleChange = (e: FormEvent<{}>) => {
     const newForm = { ...form };
     newForm[(e.target as HTMLInputElement).name] = (
@@ -69,55 +70,68 @@ export const Login = () => {
   };
 
   const handleSubmit = () => {
+    setIsProcessing(true);
     PostData("Identity/Login", form)
-      .then(() => history.push("/"))
-      .catch(() => alert("نام کاربری یا رمز اشتباه است"));
+      .then(() => {
+        setIsDone(true);
+        setIsProcessing(false);
+      })
+      .catch(() => {
+        alert("نام کاربری یا رمز اشتباه است");
+        setIsProcessing(false);
+      });
   };
 
   const classes = useStyles();
   return (
     <Grid container>
-        <Grid xs={12} md={6} container alignItems="center" justify="center">
-          <Paper rounded className={classes.paper}>
-            <Grid className={classes.header}>
-              <h3>ورود به الورتبه</h3>
-            </Grid>
-            <Grid>
-              <FormControl className={classes.fullWidth}>
-                <InputLabel className={classes.label}>نام کاربری</InputLabel>
-                <Input
-                  onChange={handleChange}
-                  value={form.userName}
-                  name="userName"
-                />
-              </FormControl>
-            </Grid>
-            <Grid>
-              <FormControl className={classes.fullWidth}>
-                <InputLabel className={classes.label}>رمز ورود</InputLabel>
-                <Input
-                  onChange={handleChange}
-                  value={form.password}
-                  type="password"
-                  name="password"
-                />
-              </FormControl>
-            </Grid>
+      <Grid xs={12} md={6} container alignItems="center" justify="center">
+        <Paper rounded className={classes.paper}>
+          <Grid className={classes.header}>
+            <h3>ورود به الورتبه</h3>
+          </Grid>
+          <Grid>
+            <FormControl className={classes.fullWidth}>
+              <InputLabel className={classes.label}>نام کاربری</InputLabel>
+              <Input
+                onChange={handleChange}
+                value={form.userName}
+                name="userName"
+              />
+            </FormControl>
+          </Grid>
+          <Grid>
+            <FormControl className={classes.fullWidth}>
+              <InputLabel className={classes.label}>رمز ورود</InputLabel>
+              <Input
+                onChange={handleChange}
+                value={form.password}
+                type="password"
+                name="password"
+              />
+            </FormControl>
+          </Grid>
+          {isProcessing ? (
+            <CircularProgress
+              style={{ width: 30, height: 30, margin: 10, color: "#FD7D21" }}
+            />
+          ) : (
             <Button
-              className={classes.submitButton}
+              className={"submitButton"}
               color="primary"
               onClick={handleSubmit}
               variant="contained"
             >
               ورود
             </Button>
-          </Paper>
+          )}
+        </Paper>
+      </Grid>
+      <Hidden smDown>
+        <Grid md={6}>
+          <img src={SignIn} alt="signin" className={classes.banner} />
         </Grid>
-        <Hidden xsDown>
-          <Grid md={6}>
-              <img src={SignIn} alt="signin" className={classes.banner}/>
-          </Grid>
-        </Hidden>
+      </Hidden>
     </Grid>
   );
 };
