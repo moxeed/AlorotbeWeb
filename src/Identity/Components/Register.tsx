@@ -361,7 +361,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
 
   const classes = useStyles();
   return (
-    <Grid container>
+    <Grid container className={"Fade-in"}>
       <Grid xs={12} md={6} container alignItems="center" justify="center">
         <Paper rounded className={classes.paper}>
           <Grid className={classes.header}>

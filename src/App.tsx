@@ -1,3 +1,5 @@
+/** @format */
+
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { LandingPage } from "./Landing/LandingPage";
@@ -7,7 +9,8 @@ import { createTheme, Modal, ThemeProvider } from "@material-ui/core";
 import { MuiThemeProvider } from "material-ui/styles";
 import { SubmitWorkWrapper } from "./Study/SubmitWorkWrapper";
 import ModalWrapper from "./Common/ModalWrapper";
-
+import { Footer } from "./Layout/Footer";
+import { MainHeader } from "./Layout/MainHeader";
 const theme = createTheme({
   palette: {
     secondary: {
@@ -23,6 +26,7 @@ function App() {
       <MuiThemeProvider>
         <ThemeProvider theme={theme}>
           <BrowserRouter>
+            <MainHeader />
             <Switch>
               <Route path="/Identity" component={IdentityPage} />
               <Route path="/Top" component={TopPage} />
@@ -34,6 +38,7 @@ function App() {
           </div>
         </ThemeProvider>
       </MuiThemeProvider>
+      <Footer />
     </div>
   );
 }
