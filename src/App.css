@@ -50,3 +50,30 @@
   font-weight: 800;
   src: url("./Assets/Sahel.ttf");
 }
+
+
+
+.Fade-in{
+  -webkit-animation:  Present 3s ease ;
+  -moz-animation:  Present 3s ease ;
+  -ms-animation:  Present 3s ease ;
+  animation: Present 3s ease ;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+@-moz-keyframes Present {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-ms-keyframes Present {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes Present {
+   0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-webkit-keyframes Present {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}

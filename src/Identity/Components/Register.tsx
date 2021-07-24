@@ -81,7 +81,7 @@ const initValue: { [index: string]: any } = {
   cityId: 1,
   majorId: 0,
   gradeId: 0,
-  suppporterId: 0,
+  suppporterId: null,
 };
 
 export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
@@ -140,7 +140,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
         return (
           <>
             <Grid>
-              <FormControl className={classes.fullWidth}>
+              <FormControl className={classes.fullWidth} required>
                 <InputLabel className={classes.label}>نام کاربری</InputLabel>
                 <Input
                   onChange={handleChangeString}
@@ -150,7 +150,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
               </FormControl>
             </Grid>
             <Grid>
-              <FormControl className={classes.fullWidth}>
+              <FormControl className={classes.fullWidth} required>
                 <InputLabel className={classes.label}>رمز ورود</InputLabel>
                 <Input
                   onChange={handleChangeString}
@@ -166,7 +166,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
         return (
           <>
             <Grid>
-              <FormControl className={classes.fullWidth}>
+              <FormControl className={classes.fullWidth} required>
                 <InputLabel className={classes.label}> نام</InputLabel>
                 <Input
                   onChange={handleChangeString}
@@ -176,7 +176,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
               </FormControl>
             </Grid>
             <Grid>
-              <FormControl className={classes.fullWidth}>
+              <FormControl className={classes.fullWidth} required>
                 <InputLabel className={classes.label}>نام خانوادگی</InputLabel>
                 <Input
                   onChange={handleChangeString}
@@ -186,7 +186,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
               </FormControl>
             </Grid>
             <Grid>
-              <FormControl className={classes.fullWidth}>
+              <FormControl className={classes.fullWidth} required>
                 <InputLabel className={classes.label}>شماره تماس</InputLabel>
                 <Input
                   onChange={handleChangeString}
@@ -212,7 +212,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
               </FormControl>
             </Grid>
             <Grid>
-              <FormControl className={classes.fullWidth}>
+              <FormControl className={classes.fullWidth} required>
                 <InputLabel className={classes.label}>پایه تحصیلی </InputLabel>
                 <Select
                   value={form.gradeId}
@@ -232,7 +232,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
         return (
           <>
             <Grid>
-              <FormControl className={classes.fullWidth}>
+              <FormControl className={classes.fullWidth} required>
                 <InputLabel className={classes.label}> رشته تحصیلی</InputLabel>
                 <Select
                   value={form.majorId}
@@ -299,7 +299,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             </Grid>
             {String(form.hasSupporter) === "true" ? (
               <Grid>
-                <FormControl className={classes.fullWidth}>
+                <FormControl className={classes.fullWidth} required>
                   <InputLabel className={classes.label}>نام مشاور</InputLabel>
                   <Select
                     value={form.suppporterId}
@@ -338,13 +338,25 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
   };
 
   const handleSubmit = () => {
-    PostData("Identity/Register", form)
-      .then(() => {
-        setIsDone(true);
-      })
-      .catch(() => {
-        alert("اطلاعات تکمیل نیست");
-      });
+    if (
+      form.userName !== "" &&
+      form.password !== "" &&
+      form.name !== "" &&
+      form.lastName !== "" &&
+      form.phoneNumber !== "" &&
+      form.majorId !== 0 &&
+      form.gradeId !== 0
+    ) {
+      PostData("Identity/Register", form)
+        .then(() => {
+          setIsDone(true);
+        })
+        .catch(() => {
+          alert("اطلاعات تکمیل نیست");
+        });
+    } else {
+      alert("بعضی از اطلاعات ضروری ناقص وارد شده است.");
+    }
   };
 
   const classes = useStyles();
