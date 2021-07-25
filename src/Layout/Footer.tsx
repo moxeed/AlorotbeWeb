@@ -130,7 +130,7 @@ export const Footer = () => {
         style={{ background: "#F67C01" }}
       >
         <Typography style={{ color: "#fff", fontSize: "10px" }}>
-          Copyright @2021 Alorotbeh.ir
+          Copyright @2021 Alorotbeh.com
         </Typography>
       </Grid>
     </Grid>
