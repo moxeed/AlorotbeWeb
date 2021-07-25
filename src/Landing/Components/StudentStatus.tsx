@@ -2,7 +2,11 @@
 import { Button } from "@material-ui/core";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useContext } from "react";
+import { IdentityContext } from "../../App";
 import Banner from "../../Assets/Study.jpg";
+import { SubmitWorkButton } from "../../Study/SubmitWorkButton";
+import { MyRank } from "./MyRank";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export const StudentStatus = () => {
+  const { isAuthenticated } = useContext(IdentityContext);
   const classes = useStyles();
 
   return (
@@ -48,6 +53,18 @@ export const StudentStatus = () => {
                                             `}
           </Typography>
         </Grid>
+
+        {isAuthenticated ? (
+          <>
+            <MyRank />
+            <Grid item>
+              <Typography className={"Main-text-Ex"}>
+                گزارش امروزتو ثبت نکردی؟
+              </Typography>
+              <SubmitWorkButton />
+            </Grid>
+          </>
+        ) : null}
       </Grid>
       <Grid className={classes.container} item xs={12} md={6}>
         <img src={Banner} alt="banner" width="75%" />

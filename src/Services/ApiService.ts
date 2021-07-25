@@ -1,10 +1,13 @@
 import { GetToken } from "./Identity";
 
 const BaseUrl = "https://api.alorotbe.com/";
+
 export const GetData = (url: string) => {
   return fetch(BaseUrl + url, {
-    mode: "cors",
     method: "GET",
+    headers: {
+      Authorization: "Bearer " + GetToken(),
+    },
   }).then((res) => res.json());
 };
 
@@ -17,7 +20,6 @@ export const PostData = (url: string, body: any) => {
     },
     body: JSON.stringify(body),
   }).then((res) => {
-    debugger;
     if (res.status < 400) return res.json();
     return Promise.reject();
   });

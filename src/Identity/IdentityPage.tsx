@@ -3,22 +3,13 @@
 import { Route, Router } from "react-router-dom";
 import { Login } from "./Components/Login";
 import { Register } from "./Components/Register";
-import { Box, createStyles, Grid, makeStyles } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import RedirectImg from "../Assets/orange_down.png";
 import "./Loading/RedirectIdentity.css";
 import { useEffect, useState } from "react";
 import { LoadingRedirect } from "./Loading/Loading";
 import { useHistory } from "react-router-dom";
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    top: {
-      height: 100,
-      width: "100%",
-      backgroundColor: theme.palette.secondary.main,
-    },
-  })
-);
 
 export const IdentityPage = () => {
   const [isDone, setIsDone] = useState(false);
@@ -31,10 +22,8 @@ export const IdentityPage = () => {
     }
   }, [isDone]);
 
-  const classes = useStyles();
   return (
     <Grid container justify="center">
-      <Box className={classes.top}></Box>
       <div
         className={isDone === true ? "RedirectIdentity" : "DisplayNoneIdentity"}
       >

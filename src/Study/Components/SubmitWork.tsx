@@ -137,6 +137,7 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
       <Grid container justify="center" spacing={5} style={{ padding: 20 }}>
         <Grid item>
           <Fab
+            style={{ boxShadow: "none" }}
             color={mood === 0 ? "secondary" : "default"}
             onClick={() => setMood(0)}
           >
@@ -145,6 +146,7 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
         </Grid>
         <Grid item>
           <Fab
+            style={{ boxShadow: "none" }}
             color={mood === 1 ? "secondary" : "default"}
             onClick={() => setMood(1)}
           >
@@ -153,6 +155,7 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
         </Grid>
         <Grid item>
           <Fab
+            style={{ boxShadow: "none" }}
             color={mood === 2 ? "secondary" : "default"}
             onClick={() => setMood(2)}
           >
@@ -161,6 +164,7 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
         </Grid>
         <Grid item>
           <Fab
+            style={{ boxShadow: "none" }}
             color={mood === 3 ? "secondary" : "default"}
             onClick={() => setMood(3)}
           >
