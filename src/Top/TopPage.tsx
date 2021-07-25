@@ -13,7 +13,11 @@ const useStyles = makeStyles((theme) => ({
 export const TopPage = () => {
   const classes = useStyles();
   return (
-    <Grid container justify="center" style={{marginTop:"50px",minHeight:"60vh"}}>
+    <Grid
+      container
+      justify="center"
+      style={{ marginTop: "150px", minHeight: "60vh" }}
+    >
       <Grid container justify="center">
         <Grid xs={9} md={4} item>
           <img src={StudentImage} style={{ width: "100%" }} alt="Students" />
