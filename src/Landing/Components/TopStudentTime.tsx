@@ -46,7 +46,7 @@ export const TopStudentTime = () => {
       .catch(() => setData(null));
   }, []);
   return (
-    <Grid container>
+    <Grid container xs={12}>
       <Grid item xs={12} sm={1}>
         <Typography variant="h5" className={classes.title}>
           برتر های زمانی امروز

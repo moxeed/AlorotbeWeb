@@ -49,11 +49,10 @@ export const CardsTop = (prop: {
       md={2}
       style={{ display: "flex", justifyContent: "center" }}
     >
-      {" "}
       {Data && Data.length > 0 ? (
         Data.map((item) => (
           <Card className={classes.root}>
-            <Grid container>
+            <Grid container xs={12}>
               <Grid
                 item
                 xs={8}

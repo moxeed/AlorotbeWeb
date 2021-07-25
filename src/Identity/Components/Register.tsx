@@ -18,6 +18,7 @@ import { MenuItem, Paper } from "material-ui";
 import React, { useState, FC, FormEvent, useEffect } from "react";
 import { PostData, GetData } from "../../Services/ApiService";
 import SignIn from "../../Assets/SignIn.png";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -414,6 +415,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                 </div>
               </div>
             </div>
+            <NavLink to="/Identity/Login">حساب دارید؟ وارد شوید</NavLink>
           </Grid>
         </Paper>
       </Grid>

@@ -19,6 +19,7 @@ import rtl from "jss-rtl";
 import { createContext } from "react";
 import { useState } from "react";
 import { TokenManager } from "./Identity/Components/TokenManager";
+import { WithMenu } from "./Common/WithMenu";
 
 const theme = createTheme({
   palette: {
@@ -51,11 +52,10 @@ function App() {
             >
               <TokenManager />
               <BrowserRouter>
-                <MainHeader />
                 <Switch>
                   <Route path="/Identity" component={IdentityPage} />
-                  <Route path="/Top" component={TopPage} />
-                  <Route path="/" component={LandingPage} />
+                  <Route path="/Top" component={() => WithMenu(TopPage)} />
+                  <Route path="/" component={() => WithMenu(LandingPage)} />
                 </Switch>
                 <div style={{ position: "fixed", bottom: 80, right: 50 }}>
                   {token === null ? null : <SubmitWorkWrapper />}

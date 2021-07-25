@@ -17,6 +17,7 @@ import SignIn from "../../Assets/Login.png";
 import { FC } from "react";
 import { useContext } from "react";
 import { IdentityContext } from "../../App";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles({
   header: {
@@ -138,6 +139,7 @@ export const Login: FC<Props> = ({ isDone, setIsDone, ...props }) => {
               ورود
             </Button>
           )}
+          <NavLink to="/Identity/Register">حساب ندارید؟ ثبت نام کنید</NavLink>
         </Paper>
       </Grid>
     </Grid>
