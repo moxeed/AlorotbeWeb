@@ -92,7 +92,7 @@ export const Login: FC<Props> = ({ isDone, setIsDone, ...props }) => {
 
   const classes = useStyles();
   return (
-    <Grid container className={"Fade-in"} style={{ height: "100vh" }}>
+    <Grid container className={"Fade-in"} >
       <Hidden smDown>
         <Grid md={6}>
           <img src={SignIn} alt="signin" className={classes.banner} />

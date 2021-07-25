@@ -48,12 +48,6 @@ export const StudentStatus = () => {
                                             `}
           </Typography>
         </Grid>
-        <Grid item>
-          <Typography className={"Main-text-Ex"}>
-            گزارش امروزتو ثبت نکردی؟
-          </Typography>
-          <Button className={"submitButton"}>ثبت گزارش</Button>
-        </Grid>
       </Grid>
       <Grid className={classes.container} item xs={12} md={6}>
         <img src={Banner} alt="banner" width="75%" />

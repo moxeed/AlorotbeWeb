@@ -6,6 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Link, NavLink, Route, Router, useHistory } from "react-router-dom";
 import {
   Drawer,
@@ -16,6 +18,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
 import { useState } from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
@@ -31,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "-150px",
   },
   root2: {
-    width: "80%",
+    width: "90%",
     margin: "20px 10%",
   },
   service: {
@@ -74,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "32px",
     color: "#FD7D21",
     verticalAlign: "middle",
+    margin: "0 10px",
   },
 }));
 
@@ -160,15 +164,22 @@ export const MainHeader = () => {
             </IconButton>
           </div>
           <List>
-            <Link
-              onClick={handleDrawerToggle}
-              to={"/Top"}
-              style={{ color: "#000" }}
+            <ListItem
+              button
+              component="a"
+              className={classes.service}
+              divider={true}
             >
-              <ListItem button component="a" divider={true}>
-                <ListItemText primary={"لیست برتر ها"} />
-              </ListItem>
-            </Link>
+              <ListItemIcon>
+                <PeopleAltIcon />
+              </ListItemIcon>
+              <NavLink to="/Top" style={{ color: "#555555" }}>
+                <Typography variant="h6" className={classes.title}>
+                  لیست برتر ها
+                </Typography>
+              </NavLink>
+            </ListItem>
+
             {isAuthenticated ? (
               <ListItem
                 button
@@ -194,7 +205,7 @@ export const MainHeader = () => {
                   divider={true}
                 >
                   <ListItemIcon>
-                    <PowerSettingsNewIcon />
+                    <LockOpenIcon />
                   </ListItemIcon>
                   <NavLink to="/Identity/Login" style={{ color: "#555555" }}>
                     <Typography variant="h6" className={classes.title}>
@@ -210,7 +221,7 @@ export const MainHeader = () => {
                   divider={true}
                 >
                   <ListItemIcon>
-                    <PowerSettingsNewIcon />
+                    <ExitToAppIcon />
                   </ListItemIcon>
                   <NavLink to="/Identity/Register" style={{ color: "#555555" }}>
                     <Typography variant="h6" className={classes.title}>

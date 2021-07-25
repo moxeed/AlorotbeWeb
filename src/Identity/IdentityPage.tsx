@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) =>
   createStyles({
     top: {
-      height: 200,
+      height: 100,
       width: "100%",
       backgroundColor: theme.palette.secondary.main,
     },
