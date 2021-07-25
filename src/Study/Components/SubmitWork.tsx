@@ -3,7 +3,6 @@ import {
   Fab,
   FormControl,
   Grid,
-  Input,
   InputLabel,
   makeStyles,
   Select,
@@ -16,6 +15,10 @@ import SentimentSatisfiedIcon from "@material-ui/icons/SentimentSatisfied";
 import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import { TimePicker } from "material-ui";
+import IModal from "../../Common/IModal";
+import { Course, CoursePicker } from "./CoursePicker";
+import { ITimePicker } from "./ITimePicker";
+import { timelineEnd } from "console";
 
 const useStyles = makeStyles({
   header: {
@@ -40,7 +43,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const SubmitWork = () => {
+export const SubmitWork = (prop: { onFinish: () => void }) => {
   const [courseStudies, setStudies] = useState(
     [] as Array<{
       testCount: number | null;
@@ -48,44 +51,49 @@ export const SubmitWork = () => {
       courseId: number | null;
     }>
   );
-  const [selfEstimation, setSelfEstimation] = useState(10);
+  const [selfEstimation, setSelfEstimation] = useState<number | null>(10);
   const [mood, setMood] = useState(0);
-  const [awakeTime, setAwakeTime] = useState("08:00");
+  const [awakeTime, setAwakeTime] = useState("");
 
-  const [courses, setCourses] = useState(
-    [] as Array<{ id: number; name: string }>
-  );
+  const [courses, setCourses] = useState([] as Array<Course>);
+  const [remainingCourses, setRemainingCourses] = useState<Array<Course>>([]);
 
-  const handleAddCourse = () => {
+  const [open, setOpen] = useState(false);
+  const [isValid, setValid] = useState<boolean>(true);
+  const handleAddCourse = (courseId: number | null) => {
+    if (courseId === null) return;
+
     const newState = [
       ...courseStudies,
       {
         testCount: null,
-        studyTime: "01:00",
-        courseId: courses[0]?.id,
+        studyTime: "",
+        courseId: courseId,
       },
     ];
+    setOpen(false);
     setStudies(newState);
   };
+
+  useEffect(() => {
+    const newRemainingCourses = [...courses].filter(
+      (c) => courseStudies.filter((cs) => cs.courseId == c.id).length === 0
+    );
+    setRemainingCourses(newRemainingCourses);
+  }, [courseStudies, courses]);
 
   useEffect(() => {
     GetData("BasicInfo/Course")
       .then((res) => {
         setCourses(res);
-        handleAddCourse();
+        handleAddCourse(res[0].id);
       })
       .catch();
   }, []);
 
-  const handleStudyTimeChange = (time: Date, index: number) => {
+  const handleStudyTimeChange = (time: string, index: number) => {
     const newState = [...courseStudies];
-    newState[index].studyTime = `${time.getHours()}:${time.getMinutes()}`;
-    setStudies(newState);
-  };
-
-  const handleCourseChange = (e: FormEvent<{}>, index: number) => {
-    const newState = [...courseStudies];
-    newState[index].courseId = +(e.target as HTMLInputElement).value;
+    newState[index].studyTime = time;
     setStudies(newState);
   };
 
@@ -96,6 +104,19 @@ export const SubmitWork = () => {
   };
 
   const handleSubmit = () => {
+    if (selfEstimation === null || awakeTime === "") {
+      setValid(false);
+      return;
+    }
+
+    if (
+      courseStudies.filter((c) => c.testCount === null || c.studyTime == "")
+        .length > 0
+    ) {
+      setValid(false);
+      return;
+    }
+
     PostData("Planning/Submit", {
       selfEstimation,
       mood,
@@ -103,8 +124,8 @@ export const SubmitWork = () => {
       courseStudies,
     })
       .then(() => {
-        debugger;
         alert("ثبت شد");
+        prop.onFinish();
       })
       .catch();
   };
@@ -149,22 +170,16 @@ export const SubmitWork = () => {
       </Grid>
       <Grid xs={12} container justify="center">
         <Grid xs={6}>
-          <FormControl className={classes.fullWidth} variant="outlined">
-            <TimePicker
-              onChange={(e, d) =>
-                setAwakeTime(`${d.getHours()}:${d.getMinutes()}`)
-              }
-              className="MuiInputBase-input MuiInput-input"
-              fullWidth
-              format="24hr"
-              hintText="مدت زمان بیدار بودن"
-              cancelLabel
-            />
-          </FormControl>
+          <ITimePicker
+            error={!isValid && awakeTime === ""}
+            label="مدت زمان بیدار بودن"
+            onChange={setAwakeTime}
+            value={awakeTime}
+          />
         </Grid>
         <Grid xs={6}>
           <TextField
-            variant="outlined"
+            error={selfEstimation === null && !isValid}
             label="ارزیابی از خود"
             onChange={(e) =>
               setSelfEstimation(+(e.target as HTMLInputElement).value)
@@ -178,14 +193,12 @@ export const SubmitWork = () => {
         {courseStudies.map((s, index) => (
           <Grid container key={index} style={{ margin: 5 }}>
             <Grid xs={5}>
-              <FormControl className={classes.fullWidth} variant="outlined">
-                <InputLabel id="demo-simple-select-readonly-label">
-                  درس
-                </InputLabel>
+              <FormControl className={classes.fullWidth}>
+                <InputLabel>درس</InputLabel>
                 <Select
+                  disabled
+                  error={s.courseId === null}
                   key={index}
-                  labelId="demo-simple-select-readonly-label"
-                  onChange={(e) => handleCourseChange(e, index)}
                   value={s.courseId}
                   label="درس"
                 >
@@ -196,25 +209,20 @@ export const SubmitWork = () => {
               </FormControl>
             </Grid>
             <Grid xs={4}>
-              <FormControl className={classes.fullWidth} variant="outlined">
-                <TimePicker
-                  key={index}
-                  onChange={(e, d) => handleStudyTimeChange(d, index)}
-                  className="MuiInputBase-input MuiInput-input"
-                  fullWidth
-                  format="24hr"
-                  hintText="زمان مطالعه"
-                  cancelLabel
-                />
-              </FormControl>
+              <ITimePicker
+                error={s.studyTime === "" && !isValid}
+                label="مدت مطالعه"
+                value={s.studyTime}
+                onChange={(d) => handleStudyTimeChange(d, index)}
+              />
             </Grid>
             <Grid xs={3}>
               <TextField
+                error={s.testCount === null && !isValid}
                 onChange={(e) => handleTestCountChange(e, index)}
                 label="تعداد تست"
                 value={s.testCount}
                 type="number"
-                variant="outlined"
                 fullWidth
               />
             </Grid>
@@ -222,13 +230,20 @@ export const SubmitWork = () => {
         ))}
       </Grid>
       <Button
+        style={{ margin: 20 }}
         variant="contained"
         color="primary"
-        style={{ margin: 20 }}
-        onClick={handleAddCourse}
+        disabled={remainingCourses.length === 0}
+        onClick={() => setOpen(true)}
       >
         افزودن درس
       </Button>
+      <IModal open={open} onClose={() => setOpen(false)}>
+        <CoursePicker
+          courses={remainingCourses}
+          onCourseSelect={handleAddCourse}
+        />
+      </IModal>
       <Button
         color="secondary"
         style={{ margin: 20 }}
