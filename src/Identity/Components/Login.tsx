@@ -15,6 +15,8 @@ import { FormEvent, useState } from "react";
 import { PostData } from "../../Services/ApiService";
 import SignIn from "../../Assets/Login.png";
 import { FC } from "react";
+import { useContext } from "react";
+import { IdentityContext } from "../../App";
 
 const useStyles = makeStyles({
   header: {
@@ -59,6 +61,7 @@ const initValue: { [index: string]: string } = {
 };
 
 export const Login: FC<Props> = ({ isDone, setIsDone, ...props }) => {
+  const { setToken } = useContext(IdentityContext);
   const [form, setForm] = useState(initValue);
   const [isProcessing, setIsProcessing] = useState(false);
   const handleChange = (e: FormEvent<{}>) => {
@@ -73,7 +76,8 @@ export const Login: FC<Props> = ({ isDone, setIsDone, ...props }) => {
     if (form.password !== "" && form.userName !== "") {
       setIsProcessing(true);
       PostData("Identity/Login", form)
-        .then(() => {
+        .then((res) => {
+          setToken(res.token);
           setIsDone(true);
           setIsProcessing(false);
         })
@@ -89,7 +93,7 @@ export const Login: FC<Props> = ({ isDone, setIsDone, ...props }) => {
   const classes = useStyles();
   return (
     <Grid container className={"Fade-in"}>
-       <Hidden smDown>
+      <Hidden smDown>
         <Grid md={6}>
           <img src={SignIn} alt="signin" className={classes.banner} />
         </Grid>

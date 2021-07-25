@@ -6,39 +6,33 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import { Link } from "react-router-dom";
+import { Link, NavLink, Route, Router, useHistory } from "react-router-dom";
 import {
   Drawer,
+  Grid,
   Hidden,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import PhoneCallbackIcon from "@material-ui/icons/PhoneCallback";
+import { useContext } from "react";
+import { IdentityContext } from "../App";
 
 const useStyles = makeStyles((theme) => ({
   root1: {
-    flexGrow: 1,
-    top: "5px",
-    position: "fixed",
     width: "80%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    textAlign: "right",
-    transition: "transform 2s",
+    margin: "5px 10%",
+    marginBottom: "-150px",
   },
   root2: {
-    flexGrow: 1,
-    top: "85px",
-    position: "fixed",
     width: "80%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    textAlign: "right",
-    transition: "transform 2s",
+    margin: "20px 10%",
   },
   service: {
     textAlign: "center",
@@ -58,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
   links: {
     display: "flex",
-    justifyContent: "right",
+    justifyContent: "left",
     minHeight: "70px",
     alignItems: "center",
   },
@@ -76,36 +70,39 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     padding: "0 30px",
   },
+  icon: {
+    fontSize: "32px",
+    color: "#FD7D21",
+    verticalAlign: "middle",
+  },
 }));
 
 export const MainHeader = () => {
+  const { isAuthenticated, setToken } = useContext(IdentityContext);
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const [change, setChange] = useState(false);
-  const [path, setPath] = useState("");
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const handleScroll = () => {
-    const position = window.pageYOffset;
-    setScrollPosition(position);
-  };
-  useEffect(() => {
-    setPath(window.location.pathname);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    path === "/"
-      ? scrollPosition > 50
-        ? setChange(true)
-        : setChange(false)
-      : setChange(true);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [path, scrollPosition]);
+
   return (
-    <div className={change ? classes.root1 : classes.root2}>
-      <AppBar position="fixed" color="inherit">
+    <>
+      <Router history={useHistory()}>
+        <Route path="/" exact>
+          <Grid container className={classes.root2}>
+            <div>
+              <LocationOnIcon className={classes.icon} />
+              <label>آدرس شرکت</label>
+            </div>
+            <div>
+              <PhoneCallbackIcon className={classes.icon} />
+              <label> شماره تماس</label>
+            </div>
+          </Grid>
+        </Route>
+      </Router>
+
+      <AppBar position="sticky" color="inherit" className={classes.root1}>
         <nav className={classes.links}>
           <Hidden mdUp>
             <Button onClick={handleDrawerToggle} style={{ width: "60px" }}>
@@ -123,14 +120,31 @@ export const MainHeader = () => {
                 لیست برتر ها
               </Typography>
             </Link>
-          </Hidden>
-          <Hidden smDown>
-            <Button color="inherit">خروج</Button>
+            {isAuthenticated ? (
+              <Button color="inherit" onClick={() => setToken(null)}>
+                <Typography variant="h6" className={classes.title}>
+                  خروج
+                </Typography>
+              </Button>
+            ) : (
+              <>
+                <NavLink to="/Identity/Login" style={{ color: "#555555" }}>
+                  <Typography variant="h6" className={classes.title}>
+                    ورود
+                  </Typography>
+                </NavLink>
+                <NavLink to="/Identity/Register" style={{ color: "#555555" }}>
+                  <Typography variant="h6" className={classes.title}>
+                    ثبت نام
+                  </Typography>
+                </NavLink>
+              </>
+            )}
           </Hidden>
         </nav>
         <Drawer
           variant="temporary"
-          anchor={"right"}
+          anchor={"left"}
           open={mobileOpen}
           onClose={handleDrawerToggle}
           classes={{
@@ -155,20 +169,60 @@ export const MainHeader = () => {
                 <ListItemText primary={"لیست برتر ها"} />
               </ListItem>
             </Link>
-            <ListItem
-              button
-              component="a"
-              className={classes.service}
-              divider={true}
-            >
-              <ListItemIcon>
-                <PowerSettingsNewIcon />
-              </ListItemIcon>
-              <Button color="inherit">خروج</Button>
-            </ListItem>
+            {isAuthenticated ? (
+              <ListItem
+                button
+                component="a"
+                className={classes.service}
+                divider={true}
+              >
+                <ListItemIcon>
+                  <PowerSettingsNewIcon />
+                </ListItemIcon>
+                <Button color="inherit" onClick={() => setToken(null)}>
+                  <Typography variant="h6" className={classes.title}>
+                    خروج
+                  </Typography>
+                </Button>
+              </ListItem>
+            ) : (
+              <>
+                <ListItem
+                  button
+                  component="a"
+                  className={classes.service}
+                  divider={true}
+                >
+                  <ListItemIcon>
+                    <PowerSettingsNewIcon />
+                  </ListItemIcon>
+                  <NavLink to="/Identity/Login" style={{ color: "#555555" }}>
+                    <Typography variant="h6" className={classes.title}>
+                      ورود
+                    </Typography>
+                  </NavLink>
+                </ListItem>
+
+                <ListItem
+                  button
+                  component="a"
+                  className={classes.service}
+                  divider={true}
+                >
+                  <ListItemIcon>
+                    <PowerSettingsNewIcon />
+                  </ListItemIcon>
+                  <NavLink to="/Identity/Register" style={{ color: "#555555" }}>
+                    <Typography variant="h6" className={classes.title}>
+                      ثبت نام
+                    </Typography>
+                  </NavLink>
+                </ListItem>
+              </>
+            )}
           </List>
         </Drawer>
       </AppBar>
-    </div>
+    </>
   );
 };
