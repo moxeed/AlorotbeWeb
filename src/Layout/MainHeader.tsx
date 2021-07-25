@@ -16,12 +16,12 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  root1: {
     flexGrow: 1,
     top: "5px",
     position: "fixed",
@@ -29,6 +29,17 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     transform: "translate(-50%, -50%)",
     textAlign: "right",
+    transition: "transform 2s",
+  },
+  root2: {
+    flexGrow: 1,
+    top: "85px",
+    position: "fixed",
+    width: "80%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    textAlign: "right",
+    transition: "transform 2s",
   },
   service: {
     textAlign: "center",
@@ -74,8 +85,20 @@ export const MainHeader = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className={classes.root}>
+    <div className={scrollPosition > 50 ? classes.root1 : classes.root2}>
       <AppBar position="fixed" color="inherit">
         <nav className={classes.links}>
           <Hidden mdUp>

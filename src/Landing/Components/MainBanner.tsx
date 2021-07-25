@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
   contact: {
     flexGrow: 1,
-    top: "130px",
+    top: "50px",
     position: "absolute",
     width: "80%",
     left: "50%",
