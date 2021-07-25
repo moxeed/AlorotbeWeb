@@ -13,16 +13,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   title: {
-    transform: "rotate(90deg)",
-    width: "160px",
-    height: "100px",
+    transform: "rotate(0deg)",
     fontSize: "18px",
     marginTop: "40px",
-    "@media (max-width: 425px)": {
-      transform: "rotate(0deg)",
-      width: "auto",
-      height: "auto",
-    },
   },
 }));
 export const TopStudentTime = () => {
@@ -46,8 +39,8 @@ export const TopStudentTime = () => {
       .catch(() => setData(null));
   }, []);
   return (
-    <Grid container xs={12}>
-      <Grid item xs={12} sm={1}>
+    <Grid container>
+      <Grid item xs={12}>
         <Typography variant="h5" className={classes.title}>
           برتر های زمانی امروز
         </Typography>
@@ -57,7 +50,6 @@ export const TopStudentTime = () => {
         container
         item
         xs={12}
-        sm={11}
         justify="center"
         alignItems="center"
       >
