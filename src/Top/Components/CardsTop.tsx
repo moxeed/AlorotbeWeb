@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "600px",
     width: "100%",
     padding: "10px",
-    height: "150px",
+    minHeight: "150px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -40,71 +40,67 @@ export const CardsTop = (prop: {
 }) => {
   const { Data } = prop;
   const classes = useStyles();
-
+  console.log(Data);
   return (
-    <Grid
-      item
-      xs={12}
-      sm={4}
-      md={2}
-      style={{ display: "flex", justifyContent: "center" }}
-    >
+    <>
       {" "}
-      {Data && Data.length > 0 ? (
+      {Data && Data?.length > 0 ? (
         Data.map((item) => (
-          <Card className={classes.root}>
-            <Grid container>
-              <Grid
-                item
-                xs={8}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Typography>{item.name + " " + item.lastName}</Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <img src={IconCard} alt="icon" width="60px" />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography style={{ fontSize: "12px" }}>
-                  {item.gardeName}
-                </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Grid container justify="center" alignItems="center">
-                  <Grid
-                    item
-                    xs={6}
-                    style={{ justifyContent: "center", display: "flex" }}
-                  >
-                    <div className={classes.contentInfo}>
-                      <Typography style={{ fontSize: "10px" }}>
-                        {item.totalStudy}
-                      </Typography>
-                    </div>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={6}
-                    style={{ justifyContent: "center", display: "flex" }}
-                  >
-                    <div className={classes.contentInfo}>
-                      <Typography style={{ fontSize: "10px" }}>
-                        {item.totalTestCount + " "} تست
-                      </Typography>
-                    </div>
+          <Grid item sm={4} md={2} xs={12} style={{ margin: "10px" }}>
+            <Card className={classes.root}>
+              <Grid container>
+                <Grid
+                  item
+                  xs={8}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography>{item.name + " " + item.lastName}</Typography>
+                </Grid>
+                <Grid item xs={4}>
+                  <img src={IconCard} alt="icon" width="60px" />
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography style={{ fontSize: "12px" }}>
+                    {item.gardeName}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container justify="center" alignItems="center">
+                    <Grid
+                      item
+                      xs={6}
+                      style={{ justifyContent: "center", display: "flex" }}
+                    >
+                      <div className={classes.contentInfo}>
+                        <Typography style={{ fontSize: "10px" }}>
+                          {item.totalStudy}
+                        </Typography>
+                      </div>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={6}
+                      style={{ justifyContent: "center", display: "flex" }}
+                    >
+                      <div className={classes.contentInfo}>
+                        <Typography style={{ fontSize: "10px" }}>
+                          {item.totalTestCount + " "} تست
+                        </Typography>
+                      </div>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-            </Grid>
-          </Card>
+            </Card>
+          </Grid>
         ))
       ) : (
         <Typography>داده ای برای نمایش وجود ندارد</Typography>
       )}
-    </Grid>
+    </>
   );
 };

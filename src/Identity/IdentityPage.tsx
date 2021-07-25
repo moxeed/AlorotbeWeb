@@ -55,7 +55,11 @@ export const IdentityPage = () => {
           exact
           component={() => <Login setIsDone={setIsDone} isDone={isDone} />}
         />
-        <Route path="/Identity/Register" exact component={Register} />
+        <Route
+          path="/Identity/Register"
+          exact
+          component={() => <Register setIsDone={setIsDone} isDone={isDone} />}
+        />
       </Router>
     </Grid>
   );
