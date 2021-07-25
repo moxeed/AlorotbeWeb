@@ -46,7 +46,7 @@ export const TopStudentTest = () => {
       .catch(() => setData(null));
   }, []);
   return (
-    <Grid container style={{ height: "200px" }}>
+    <Grid container>
       <Grid item xs={12} sm={1}>
         <Typography variant="h5" className={classes.title}>
           برتر های تستی امروز
