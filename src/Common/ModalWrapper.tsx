@@ -37,9 +37,7 @@ export default function ModalWrapper(prop: { body: () => JSX.Element }) {
   const classes = useStyles();
   return (
     <div>
-      <Fab type="button" onClick={handleOpen}>
-        +
-      </Fab>
+      
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

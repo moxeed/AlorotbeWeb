@@ -38,7 +38,7 @@
 }
 
 * {
-  direction: rtl !important;
+  direction: rtl;
   box-sizing: border-box;
   font-family: main !important;
 }

@@ -3,10 +3,17 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { LandingPage } from "./Landing/LandingPage";
 import { IdentityPage } from "./Identity/IdentityPage";
 import { TopPage } from "./Top/TopPage";
-import { createTheme, Modal, ThemeProvider } from "@material-ui/core";
+import {
+  createTheme,
+  jssPreset,
+  StylesProvider,
+  ThemeProvider,
+} from "@material-ui/core";
 import { MuiThemeProvider } from "material-ui/styles";
 import { SubmitWorkWrapper } from "./Study/SubmitWorkWrapper";
 import ModalWrapper from "./Common/ModalWrapper";
+import { create } from "jss";
+import rtl from "jss-rtl";
 
 const theme = createTheme({
   palette: {
@@ -15,24 +22,30 @@ const theme = createTheme({
       contrastText: "white",
     },
   },
+  direction: "rtl",
 });
 
+const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
+
 function App() {
+  document.body.setAttribute("dir", "rtl");
   return (
     <div className="App">
       <MuiThemeProvider>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <Switch>
-              <Route path="/Identity" component={IdentityPage} />
-              <Route path="/Top" component={TopPage} />
-              <Route path="/" component={LandingPage} />
-            </Switch>
-          </BrowserRouter>
-          <div style={{ position: "fixed", bottom: 80, right: 50 }}>
-            <ModalWrapper body={SubmitWorkWrapper} />
-          </div>
-        </ThemeProvider>
+        <StylesProvider jss={jss}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Switch>
+                <Route path="/Identity" component={IdentityPage} />
+                <Route path="/Top" component={TopPage} />
+                <Route path="/" component={LandingPage} />
+              </Switch>
+            </BrowserRouter>
+            <div style={{ position: "fixed", bottom: 80, right: 50 }}>
+              <SubmitWorkWrapper />
+            </div>
+          </ThemeProvider>
+        </StylesProvider>
       </MuiThemeProvider>
     </div>
   );
