@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { LoadingRedirect } from "./Loading/Loading";
 import { useHistory } from "react-router-dom";
 
+
 export const IdentityPage = () => {
   const [isDone, setIsDone] = useState(false);
   const history = useHistory();

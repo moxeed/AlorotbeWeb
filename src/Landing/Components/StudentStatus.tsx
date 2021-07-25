@@ -53,6 +53,7 @@ export const StudentStatus = () => {
                                             `}
           </Typography>
         </Grid>
+
         {isAuthenticated ? (
           <>
             <MyRank />
