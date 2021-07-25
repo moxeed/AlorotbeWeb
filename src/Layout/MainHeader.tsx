@@ -2,7 +2,6 @@
 
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
@@ -85,20 +84,27 @@ export const MainHeader = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const [change, setChange] = useState(false);
+  const [path, setPath] = useState("");
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
     const position = window.pageYOffset;
     setScrollPosition(position);
   };
   useEffect(() => {
+    setPath(window.location.pathname);
     window.addEventListener("scroll", handleScroll, { passive: true });
+    path === "/"
+      ? scrollPosition > 50
+        ? setChange(true)
+        : setChange(false)
+      : setChange(true);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-
+  }, [path, scrollPosition]);
   return (
-    <div className={scrollPosition > 50 ? classes.root1 : classes.root2}>
+    <div className={change ? classes.root1 : classes.root2}>
       <AppBar position="fixed" color="inherit">
         <nav className={classes.links}>
           <Hidden mdUp>
