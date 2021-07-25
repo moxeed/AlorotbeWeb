@@ -1,3 +1,5 @@
+/** @format */
+
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { LandingPage } from "./Landing/LandingPage";
@@ -12,6 +14,9 @@ import {
 import { MuiThemeProvider } from "material-ui/styles";
 import { SubmitWorkWrapper } from "./Study/SubmitWorkWrapper";
 import ModalWrapper from "./Common/ModalWrapper";
+import { Footer } from "./Layout/Footer";
+import { MainHeader } from "./Layout/MainHeader";
+
 import { create } from "jss";
 import rtl from "jss-rtl";
 
@@ -33,20 +38,23 @@ function App() {
     <div className="App">
       <MuiThemeProvider>
         <StylesProvider jss={jss}>
-          <ThemeProvider theme={theme}>
-            <BrowserRouter>
-              <Switch>
-                <Route path="/Identity" component={IdentityPage} />
-                <Route path="/Top" component={TopPage} />
-                <Route path="/" component={LandingPage} />
-              </Switch>
-            </BrowserRouter>
-            <div style={{ position: "fixed", bottom: 80, right: 50 }}>
-              <SubmitWorkWrapper />
-            </div>
-          </ThemeProvider>
-        </StylesProvider>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <MainHeader />
+            <Switch>
+              <Route path="/Identity" component={IdentityPage} />
+              <Route path="/Top" component={TopPage} />
+              <Route path="/" component={LandingPage} />
+            </Switch>
+          </BrowserRouter>
+          <div style={{ position: "fixed", bottom: 80, right: 50 }}>
+            <SubmitWorkWrapper />
+          </div>
+        </ThemeProvider>
+           </StylesProvider>
+
       </MuiThemeProvider>
+      <Footer />
     </div>
   );
 }

@@ -1,0 +1,42 @@
+.RedirectIdentity{
+    width:100%;
+    height:100vh;
+    position:absolute;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  .RedirectPicture{
+    position: relative;
+    animation:RollDown 4s ease;
+    -o-animation:RollDown 4s ease;
+    -moz-animation:RollDown 4s  ease;
+    -webkit-animation:RollDown 4s ease;
+  }
+  @keyframes RollDown {
+    0%   {top: -200vh;}
+    100% {top: 0px;}
+  }
+  @-moz-keyframes show {
+    0%   {top: -200vh;}
+    100% {top: 0px;}
+  }
+  
+  @-webkit-keyframes show {
+    0%   {top: -200vh;}
+    100% {top: 0px;}
+  }
+  
+  @-o-keyframes show {
+    0%   {top: -200vh;}
+    100% {top: 0px;}
+  }
+
+.DisplayNoneIdentity{
+    display:none;
+}
+
+.RedirectButton{
+  position:absolute;
+  top:40%;
+  left:50%;
+}
