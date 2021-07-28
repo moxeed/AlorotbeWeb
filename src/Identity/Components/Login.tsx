@@ -18,10 +18,12 @@ import { FC } from "react";
 import { useContext } from "react";
 import { IdentityContext } from "../../App";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 const useStyles = makeStyles({
   header: {
-    textAlign: "right",
+    textAlign: "left",
     color: "#D36F26",
     padding: "0 30px",
     fontSize: "28px",
@@ -33,7 +35,7 @@ const useStyles = makeStyles({
   },
   banner: {
     width: "100%",
-    height: "100%",
+    height: "auto",
   },
   paper: {
     width: "70%",
@@ -44,9 +46,7 @@ const useStyles = makeStyles({
     },
   },
   label: {
-    left: "auto",
     paddingRight: 5,
-    right: "0 !important",
     color: "#FD7D21 !important",
   },
 });
@@ -82,12 +82,29 @@ export const Login: FC<Props> = ({ isDone, setIsDone, ...props }) => {
           setIsDone(true);
           setIsProcessing(false);
         })
-        .catch(() => {
-          alert("نام کاربری یا رمز اشتباه است");
+        .catch(error => {
+          console.log(error);
+          toast.error(".error", {
+            position: "bottom-left",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           setIsProcessing(false);
         });
     } else {
-      alert("نام کاربری یا رمز خالی است");
+      toast.warn("نام کاربری یا رمز خالی است", {
+        position: "bottom-left",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -139,7 +156,9 @@ export const Login: FC<Props> = ({ isDone, setIsDone, ...props }) => {
               ورود
             </Button>
           )}
-          <NavLink to="/Identity/Register">حساب ندارید؟ ثبت نام کنید</NavLink>
+          <NavLink to="/Identity/Register">حساب ندارید؟ 
+          <span style={{color:"#FD7D21"}}>ثبت نام کنید</span>
+          </NavLink>
         </Paper>
       </Grid>
     </Grid>

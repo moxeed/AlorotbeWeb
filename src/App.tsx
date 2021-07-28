@@ -12,14 +12,14 @@ import {
 import { MuiThemeProvider } from "material-ui/styles";
 import { SubmitWorkWrapper } from "./Study/SubmitWorkWrapper";
 import { Footer } from "./Layout/Footer";
-import { MainHeader } from "./Layout/MainHeader";
-
 import { create } from "jss";
 import rtl from "jss-rtl";
 import { createContext } from "react";
 import { useState } from "react";
 import { TokenManager } from "./Identity/Components/TokenManager";
 import { WithMenu } from "./Common/WithMenu";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const theme = createTheme({
   palette: {
@@ -66,6 +66,7 @@ function App() {
         </StylesProvider>
       </MuiThemeProvider>
       <Footer />
+      <ToastContainer/>
     </div>
   );
 }

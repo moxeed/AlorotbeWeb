@@ -19,7 +19,7 @@ import React, { useState, FC, FormEvent, useEffect } from "react";
 import { PostData, GetData } from "../../Services/ApiService";
 import SignIn from "../../Assets/SignIn.png";
 import { NavLink } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   header: {
-    textAlign: "right",
+    textAlign: "left",
     color: "#D36F26",
     padding: "0 30px",
     fontSize: "28px",
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   banner: {
     width: "100%",
-    height: "100%",
+    height: "auto",
   },
   paper: {
     width: "80%",
@@ -54,9 +54,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   label: {
-    left: "auto",
-    paddingRight: 5,
-    right: "0 !important",
     color: "#FD7D21 !important",
   },
   RadioBtns: {
@@ -352,11 +349,27 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
         .then(() => {
           setIsDone(true);
         })
-        .catch(() => {
-          alert("اطلاعات تکمیل نیست");
+        .catch((error) => {
+          toast.error("error?", {
+            position: "bottom-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         });
     } else {
-      alert("بعضی از اطلاعات ضروری ناقص وارد شده است.");
+      toast.warn("بعضی از اطلاعات ضروری وارد نشده است.", {
+        position: "bottom-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -415,7 +428,9 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                 </div>
               </div>
             </div>
-            <NavLink to="/Identity/Login">حساب دارید؟ وارد شوید</NavLink>
+            <NavLink to="/Identity/Login">حساب دارید؟
+            <span style={{color:"#FD7D21"}}>وارد شوید</span>
+             </NavLink>
           </Grid>
         </Paper>
       </Grid>
