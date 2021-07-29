@@ -16,10 +16,10 @@ const StyledTableCell = withStyles((theme) => ({
 
 const useStyles = makeStyles({
   container: {
+    width: "100%",
     overflowX: "auto",
     boxShadow: "0 0 1px 0px grey",
     borderRadius: 2,
-    width:"100%",
   },
 });
 
@@ -40,7 +40,7 @@ export const TopTable = (prop: {
   const { rows } = prop;
   return (
     <Paper className={classes.container}>
-      {rows ? (
+       {rows ? (
         <Table aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -53,7 +53,7 @@ export const TopTable = (prop: {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows?.map((row, index) => (
+            {rows && rows.map((row, index) => (
               <TableRow key={index}>
                 <StyledTableCell align="center">{index + 1}</StyledTableCell>
                 <StyledTableCell align="center">{row.userName}</StyledTableCell>

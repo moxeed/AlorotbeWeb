@@ -16,7 +16,6 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
 } from "@material-ui/core";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import { useState } from "react";

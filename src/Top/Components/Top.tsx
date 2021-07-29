@@ -43,7 +43,7 @@ export const Top = (prop: {
       .then(setData)
       .catch(() => setData(null));
   }, [prop.count, prop.critrien, prop.period, prop.gradeId]);
-
+console.log(data);
   return <TopTable rows={data} />;
 };
 

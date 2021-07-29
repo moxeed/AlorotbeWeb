@@ -1,9 +1,7 @@
 /** @format */
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useEffect, useState } from "react";
-import { GetData } from "../../Services/ApiService";
-import { TopTable } from "../../Top/Components/TopTable";
+import { Period, Top,Critrien } from "../../Top/Components/Top";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,29 +18,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const TopStudentTest = () => {
   const classes = useStyles();
-  const [data, setData] = useState(
-    undefined as
-      | Array<{
-          name: string;
-          lastName: string;
-          majorName: string;
-          gardeName: string;
-          totalStudy: string;
-          totalTestCount: number;
-        }>
-      | null
-      | undefined
-  );
-  useEffect(() => {
-    GetData("Planning/Top?Period=1&Criterion=1&Count=10")
-      .then(setData)
-      .catch(() => setData(null));
-  }, []);
   return (
     <Grid container className={classes.container}>
       <Grid item xs={12}>
         <Typography variant="h5" className={classes.title}>
-          برتر های تستی امروز
+          برتر های امروز
         </Typography>
       </Grid>
       <Grid
@@ -54,7 +34,12 @@ export const TopStudentTest = () => {
         alignItems="center"
         style={{maxWidth:"1020px",}}
       >
-        <TopTable rows={data} />
+        <Top 
+            period={Period.Week}
+            critrien={Critrien.Score}
+            count={15}
+            gradeId={null}
+        />
       </Grid>
     </Grid>
   );
