@@ -3,7 +3,7 @@ import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
 import { GetData } from "../../Services/ApiService";
-import { CardsTop } from "../../Top/Components/CardsTop";
+import { TopTable } from "../../Top/Components/TopTable";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -34,12 +34,12 @@ export const TopStudentTest = () => {
       | undefined
   );
   useEffect(() => {
-    GetData("Planning/DailyTop/Test/10")
+    GetData("Planning/Top?Period=1&Criterion=1&Count=10")
       .then(setData)
       .catch(() => setData(null));
   }, []);
   return (
-    <Grid container>
+    <Grid container className={classes.container}>
       <Grid item xs={12}>
         <Typography variant="h5" className={classes.title}>
           برتر های تستی امروز
@@ -52,9 +52,14 @@ export const TopStudentTest = () => {
         xs={12}
         justify="center"
         alignItems="center"
+        style={{maxWidth:"1020px",}}
       >
-        <CardsTop Data={data} />
+        <TopTable rows={data} />
       </Grid>
     </Grid>
   );
 };
+
+
+
+

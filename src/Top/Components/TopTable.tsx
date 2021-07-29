@@ -19,6 +19,7 @@ const useStyles = makeStyles({
     overflowX: "auto",
     boxShadow: "0 0 1px 0px grey",
     borderRadius: 2,
+    width:"100%",
   },
 });
 

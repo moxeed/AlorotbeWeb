@@ -3,7 +3,7 @@ import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
 import { GetData } from "../../Services/ApiService";
-import { CardsTop } from "../../Top/Components/CardsTop";
+import { Empty } from "../../Styles/Empty";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -34,12 +34,12 @@ export const TopStudentTime = () => {
       | undefined
   );
   useEffect(() => {
-    GetData("Planning/DailyTop/Time/10")
+    GetData("Planning/Top?Period=1&Criterion=2&Count=10")
       .then(setData)
       .catch(() => setData(null));
   }, []);
   return (
-    <Grid container>
+    <Grid container className={classes.container}>
       <Grid item xs={12}>
         <Typography variant="h5" className={classes.title}>
           برتر های زمانی امروز
@@ -52,8 +52,9 @@ export const TopStudentTime = () => {
         xs={12}
         justify="center"
         alignItems="center"
+        style={{maxWidth:"1020px",}}
       >
-        <CardsTop Data={data} />
+          <Empty/>
       </Grid>
     </Grid>
   );
