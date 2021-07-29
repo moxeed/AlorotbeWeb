@@ -38,7 +38,9 @@ export const Top = (prop: {
   useEffect(() => {
     GetData(
       `Planning/Top?count=${prop.count}&period=${prop.period}&criterion=${prop.critrien}` +
-        (prop.gradeId !== null ? `&gradeId=${prop.gradeId}` : "")
+        (prop.gradeId && prop.gradeId !== null
+          ? `&gradeId=${prop.gradeId}`
+          : "")
     )
       .then(setData)
       .catch(() => setData(null));
