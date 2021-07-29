@@ -340,19 +340,21 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
 
   const handleSubmit = () => {
     if (
-      form.userName !== "" &&
-      form.password !== "" &&
-      form.name !== "" &&
-      form.lastName !== "" &&
-      form.phoneNumber !== "" &&
-      form.majorId !== 0 &&
-      form.gradeId !== 0
+      true
+      // form.userName !== "" &&
+      // form.password !== "" &&
+      // form.name !== "" &&
+      // form.lastName !== "" &&
+      // form.phoneNumber !== "" &&
+      // form.majorId !== 0 &&
+      // form.gradeId !== 0
     ) {
       PostData("Identity/Register", form)
         .then(() => {
           setIsDone(true);
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error);
           alert("اطلاعات تکمیل نیست");
         });
     } else {
