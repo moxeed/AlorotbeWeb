@@ -1,4 +1,4 @@
-import { Button, Grid, Select } from "@material-ui/core";
+import { Button, FormLabel, Grid, Select } from "@material-ui/core";
 import { Critrien, Period, Top } from "./Components/Top";
 import StudentImage from "../Assets/StudentVector.jpg";
 import { useState } from "react";
@@ -71,6 +71,7 @@ export const TopPage = () => {
             </Grid>
             <Grid container style={{ padding: 20 }}>
               <Grid xs={6}>
+                <FormLabel>بازه زمانی</FormLabel>
                 <Select
                   fullWidth
                   style={{ width: "90%" }}
@@ -88,6 +89,7 @@ export const TopPage = () => {
                 </Select>
               </Grid>
               <Grid xs={6}>
+                <FormLabel>پایه</FormLabel>
                 <Select
                   style={{ width: "90%" }}
                   onChange={(e) =>
