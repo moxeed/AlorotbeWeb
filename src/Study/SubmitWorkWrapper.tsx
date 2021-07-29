@@ -1,22 +1,31 @@
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { SubmitWork } from "./Components/SubmitWork";
-import DateFnsUtils from "@date-io/date-fns";
 import IModal from "../Common/IModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Fab } from "@material-ui/core";
+import CheckIcon from "@material-ui/icons/Check";
+import { GetData } from "../Services/ApiService";
 
 export const SubmitWorkWrapper = () => {
   const [open, setOpen] = useState(false);
+  const [sent, setSent] = useState(true);
+
+  useEffect(() => {
+    GetData("Planning/Submit").then(setSent);
+  }, []);
 
   return (
     <>
-      <Fab type="button" onClick={() => setOpen(true)}>
-        +
-      </Fab>
+      {sent ? (
+        <Fab color="primary">
+          <CheckIcon />
+        </Fab>
+      ) : (
+        <Fab color="primary" type="button" onClick={() => setOpen(true)}>
+          +
+        </Fab>
+      )}
       <IModal open={open} onClose={() => setOpen(false)}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <SubmitWork onFinish={() => setOpen(false)} />
-        </MuiPickersUtilsProvider>
+        <SubmitWork onFinish={() => setOpen(false)} />
       </IModal>
     </>
   );

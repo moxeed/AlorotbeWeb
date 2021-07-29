@@ -25,12 +25,12 @@ const useStyles = makeStyles({
 export const TopTable = (prop: {
   rows:
     | Array<{
-        name: string;
-        lastName: string;
+        userName: string;
         majorName: string;
         gardeName: string;
         totalStudy: string;
         totalTestCount: number;
+        score: number;
       }>
     | null
     | undefined;
@@ -48,15 +48,14 @@ export const TopTable = (prop: {
               <StyledTableCell align="center">مقطع</StyledTableCell>
               <StyledTableCell align="center">تعداد تست</StyledTableCell>
               <StyledTableCell align="center">ساعت مطالعه</StyledTableCell>
+              <StyledTableCell align="center">امتیاز</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows?.map((row, index) => (
-              <TableRow key={row.name}>
+              <TableRow key={index}>
                 <StyledTableCell align="center">{index + 1}</StyledTableCell>
-                <StyledTableCell align="center">
-                  {row.name} {row.lastName}
-                </StyledTableCell>
+                <StyledTableCell align="center">{row.userName}</StyledTableCell>
                 <StyledTableCell align="center">
                   {row.gardeName} {row.majorName}
                 </StyledTableCell>
@@ -66,6 +65,7 @@ export const TopTable = (prop: {
                 <StyledTableCell align="center">
                   {row.totalStudy}
                 </StyledTableCell>
+                <StyledTableCell align="center">{row.score}</StyledTableCell>
               </TableRow>
             ))}
           </TableBody>

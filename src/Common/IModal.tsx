@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     paper: {
       position: "absolute",
-      maxWidth: 700,
+      maxWidth: 600,
       backgroundColor: theme.palette.background.paper,
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),

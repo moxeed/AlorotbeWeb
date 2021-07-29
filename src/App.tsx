@@ -12,7 +12,6 @@ import {
 import { MuiThemeProvider } from "material-ui/styles";
 import { SubmitWorkWrapper } from "./Study/SubmitWorkWrapper";
 import { Footer } from "./Layout/Footer";
-import { MainHeader } from "./Layout/MainHeader";
 
 import { create } from "jss";
 import rtl from "jss-rtl";

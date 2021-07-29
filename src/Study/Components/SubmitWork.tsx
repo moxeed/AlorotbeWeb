@@ -134,7 +134,7 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
   return (
     <Grid container justify="center">
       <h3>ثبت برنامه امروز</h3>
-      <Grid container justify="center" spacing={5} style={{ padding: 20 }}>
+      <Grid container justify="center" spacing={3} style={{ padding: 10 }}>
         <Grid item>
           <Fab
             style={{ boxShadow: "none" }}
@@ -176,7 +176,7 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
         <Grid xs={6}>
           <ITimePicker
             error={!isValid && awakeTime === ""}
-            label="مدت زمان بیدار بودن"
+            label="ساعت بیدار شدن"
             onChange={setAwakeTime}
             value={awakeTime}
           />
