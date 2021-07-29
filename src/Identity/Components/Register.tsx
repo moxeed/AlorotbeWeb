@@ -20,6 +20,8 @@ import { PostData, GetData } from "../../Services/ApiService";
 import SignIn from "../../Assets/SignIn.png";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
+import { SetToken } from "../../Services/Identity";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -32,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     textAlign: "left",
-    color: "#D36F26",
     padding: "0 30px",
     fontSize: "28px",
     marginBottom: 10,
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
   banner: {
     width: "100%",
-    height: "auto",
+    height: "100%",
   },
   paper: {
     width: "80%",
@@ -54,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   label: {
+    paddingRight: 5,
     color: "#FD7D21 !important",
   },
   RadioBtns: {
@@ -149,7 +151,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             </Grid>
             <Grid>
               <FormControl className={classes.fullWidth} required>
-                <InputLabel className={classes.label}>رمز ورود</InputLabel>
+                <InputLabel className={classes.label}>رمز ورود(شامل عدد، حروف و کارکتر)</InputLabel>
                 <Input
                   onChange={handleChangeString}
                   value={form.password}
@@ -185,7 +187,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             </Grid>
             <Grid>
               <FormControl className={classes.fullWidth} required>
-                <InputLabel className={classes.label}>شماره تماس</InputLabel>
+                <InputLabel className={classes.label}>شماره تماس(دوازده رقم)</InputLabel>
                 <Input
                   onChange={handleChangeString}
                   value={form.phoneNumber}
@@ -346,11 +348,12 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
       form.gradeId !== 0
     ) {
       PostData("Identity/Register", form)
-        .then(() => {
+        .then((res) => {
           setIsDone(true);
+          SetToken(res?.token);
         })
         .catch((error) => {
-          toast.error("error?", {
+          toast.error(error[0].description, {
             position: "bottom-right",
             autoClose: 4000,
             hideProgressBar: false,
@@ -361,7 +364,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
           });
         });
     } else {
-      toast.warn("بعضی از اطلاعات ضروری وارد نشده است.", {
+      toast.warn("برخی فیلد های ضروری ناقص است", {
         position: "bottom-right",
         autoClose: 4000,
         hideProgressBar: false,
@@ -428,9 +431,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                 </div>
               </div>
             </div>
-            <NavLink to="/Identity/Login">حساب دارید؟
-            <span style={{color:"#FD7D21"}}>وارد شوید</span>
-             </NavLink>
+            <NavLink to="/Identity/Login" style={{color: "#FD7D21"}}>حساب دارید؟ وارد شوید</NavLink>
           </Grid>
         </Paper>
       </Grid>

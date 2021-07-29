@@ -11,16 +11,18 @@ export const GetData = (url: string) => {
   }).then((res) => res.json());
 };
 
-export const PostData = (url: string, body: any) => {
-  return fetch(BaseUrl + url, {
+export const PostData = async (url: string, body: any) => {
+  const data = await fetch(BaseUrl + url, {
     method: "POST",
     headers: {
       "content-type": "application/json",
       Authorization: "Bearer " + GetToken(),
     },
     body: JSON.stringify(body),
-  }).then((res) => {
-    if (res.status < 400) return res.json();
-    return Promise.reject();
   });
+
+  const json = await data.json();
+
+  if (data.status < 400) return json;
+  throw json;
 };

@@ -82,9 +82,8 @@ export const Login: FC<Props> = ({ isDone, setIsDone, ...props }) => {
           setIsDone(true);
           setIsProcessing(false);
         })
-        .catch(error => {
-          console.log(error);
-          toast.error(".error", {
+        .catch((error) => {
+          toast.error(error.name, {
             position: "bottom-left",
             autoClose: 4000,
             hideProgressBar: false,
@@ -156,8 +155,8 @@ export const Login: FC<Props> = ({ isDone, setIsDone, ...props }) => {
               ورود
             </Button>
           )}
-          <NavLink to="/Identity/Register">حساب ندارید؟ 
-          <span style={{color:"#FD7D21"}}>ثبت نام کنید</span>
+          <NavLink to="/Identity/Register"style={{color: "#FD7D21"}}>
+            حساب ندارید؟    ثبت نام کنید
           </NavLink>
         </Paper>
       </Grid>
