@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     width: "80%",
     margin: "5px 10%",
     marginBottom: "-150px",
+    zIndex: 900,
   },
   root2: {
     width: "90%",

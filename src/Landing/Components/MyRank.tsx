@@ -33,7 +33,7 @@ export const MyRank = () => {
   const classes = useStyles();
 
   return (
-    <Grid container style={{ margin: 20 }} justify="center">
+    <Grid container style={{ margin: "20px 0px" }} justify="center">
       <Grid item xs={4}>
         <div className={classes.contentInfo}>
           <Typography style={{ fontSize: "20px" }}>{rank?.timeRank}</Typography>
