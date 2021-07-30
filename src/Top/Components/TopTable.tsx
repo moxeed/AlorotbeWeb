@@ -5,9 +5,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { CircularProgress } from "material-ui";
+import { Avatar, CircularProgress } from "material-ui";
 import { Empty } from "../../Styles/Empty";
-
+import User from "../../Assets/user.png";
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.secondary.main,
@@ -56,10 +56,13 @@ export const TopTable = (prop: {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row, index) => (
+                {rows.map((row:any, index) => (
                   <TableRow key={index}>
                     <StyledTableCell align="center">{index + 1}</StyledTableCell>
-                    <StyledTableCell align="center">{row.userName}</StyledTableCell>
+                    <StyledTableCell align="center">
+                      <Avatar src={row.profileId !== null ?`http://api.alorotbe.com/media/${row.profileId}`: User} style={{margin:"0 5px"}}/>
+                      {row.userName}
+                    </StyledTableCell>
                     <StyledTableCell align="center">
                       {row.gardeName} {row.majorName}
                     </StyledTableCell>
