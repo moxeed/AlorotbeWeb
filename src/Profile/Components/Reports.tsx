@@ -19,9 +19,11 @@ const StyledTableCell = withStyles((theme) => ({
 const useStyles = makeStyles({
     container: {
       width: "100%",
+      maxWidth:"1200px",
       overflowX: "auto",
       boxShadow: "0 0 1px 0px grey",
       borderRadius: 2,
+      marginTop:"40px"
     },
 });
 
