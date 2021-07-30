@@ -4,6 +4,7 @@ import StudentImage from "../Assets/StudentVector.jpg";
 import { useState } from "react";
 import { useEffect } from "react";
 import { GetData } from "../Services/ApiService";
+import { MenuItem } from "material-ui";
 
 interface Grade {
   id: number;
@@ -40,7 +41,7 @@ export const TopPage = () => {
         >
           <Grid item style={{ paddingBottom: 20 }}>
             <h1> نفرات برتر الو رتبه </h1>
-            <Grid container justify="center" spacing={4}>
+            <Grid container justify="center" spacing={3}>
               <Grid item>
                 <Button
                   onClick={() => setCritiren(Critrien.Test)}
@@ -82,10 +83,10 @@ export const TopPage = () => {
                   }
                   value={period}
                 >
-                  <option value={Period.Day}>دیروز</option>
-                  <option value={Period.Week}>هفته اخیر</option>
-                  <option value={Period.Month}>ماه اخیر</option>
-                  <option value={Period.Year}>سال اخیر</option>
+                  <MenuItem value={Period.Day}>دیروز</MenuItem>
+                  <MenuItem value={Period.Week}>هفته اخیر</MenuItem>
+                  <MenuItem value={Period.Month}>ماه اخیر</MenuItem>
+                  <MenuItem value={Period.Year}>سال اخیر</MenuItem>
                 </Select>
               </Grid>
               <Grid xs={6}>
@@ -98,9 +99,9 @@ export const TopPage = () => {
                   value={grade}
                 >
                   {grades.map((g) => (
-                    <option value={g.id}>{g.name}</option>
+                    <MenuItem value={g.id}>{g.name}</MenuItem>
                   ))}
-                  <option value="-1">همه</option>
+                  <MenuItem value="-1">همه</MenuItem>
                 </Select>
               </Grid>
             </Grid>
