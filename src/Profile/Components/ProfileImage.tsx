@@ -34,7 +34,7 @@ export const ProfileImage = () => {
 
   return (
     <Grid xs={12} justify="center" alignItems="center" container>
-      <Grid xs={6}>
+      <Grid xs={12} md={6} justify="center" alignItems="center" container>
         <Avatar
           src={
             edit && file && file !== null
@@ -46,7 +46,7 @@ export const ProfileImage = () => {
           size={150}
         />
       </Grid>
-      <Grid xs={6}>
+      <Grid xs={12} md={6} justify="center" alignItems="center" container>
         {edit ? (
           <>
             <input
