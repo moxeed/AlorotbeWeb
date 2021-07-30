@@ -6,6 +6,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { CircularProgress } from "material-ui";
+import { Empty } from "../../Styles/Empty";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -41,37 +42,42 @@ export const TopTable = (prop: {
   return (
     <Paper className={classes.container}>
        {rows ? (
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell align="center">رتبه</StyledTableCell>
-              <StyledTableCell align="center">دانش آموز</StyledTableCell>
-              <StyledTableCell align="center">مقطع</StyledTableCell>
-              <StyledTableCell align="center">تعداد تست</StyledTableCell>
-              <StyledTableCell align="center">ساعت مطالعه</StyledTableCell>
-              <StyledTableCell align="center">امتیاز</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows && rows.map((row, index) => (
-              <TableRow key={index}>
-                <StyledTableCell align="center">{index + 1}</StyledTableCell>
-                <StyledTableCell align="center">{row.userName}</StyledTableCell>
-                <StyledTableCell align="center">
-                  {row.gardeName} {row.majorName}
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  {row.totalTestCount}
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  {row.totalStudy}
-                </StyledTableCell>
-                <StyledTableCell align="center">{row.score}</StyledTableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      ) : (
+          rows.length > 0 ? 
+          (
+            <Table aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell align="center">رتبه</StyledTableCell>
+                  <StyledTableCell align="center">دانش آموز</StyledTableCell>
+                  <StyledTableCell align="center">مقطع</StyledTableCell>
+                  <StyledTableCell align="center">تعداد تست</StyledTableCell>
+                  <StyledTableCell align="center">ساعت مطالعه</StyledTableCell>
+                  <StyledTableCell align="center">امتیاز</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row, index) => (
+                  <TableRow key={index}>
+                    <StyledTableCell align="center">{index + 1}</StyledTableCell>
+                    <StyledTableCell align="center">{row.userName}</StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.gardeName} {row.majorName}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.totalTestCount}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.totalStudy}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">{row.score}</StyledTableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+          </Table>
+          ):(
+            <Empty/>
+          )
+        ) : (
         <CircularProgress></CircularProgress>
       )}
     </Paper>

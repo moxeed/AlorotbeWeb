@@ -16,7 +16,7 @@ export const CoursePicker = (prop: {
           <Button
             style={{ margin: 20 }}
             variant="contained"
-            color="primary"
+            color="secondary"
             onClick={() => prop.onCourseSelect(c.id)}
           >
             {c.name}

@@ -35,7 +35,7 @@ export const TopStudentTest = () => {
         style={{maxWidth:"1020px",}}
       >
         <Top 
-            period={Period.Week}
+            period={Period.Day}
             critrien={Critrien.Score}
             count={15}
             gradeId={null}
