@@ -82,8 +82,8 @@ export const Login: FC<Props> = ({ isDone, setIsDone, ...props }) => {
           setIsDone(true);
           setIsProcessing(false);
         })
-        .catch((error) => {
-          toast.error(error.name, {
+        .catch(() => {
+          toast.error("نام کاربری یا رمز ورود اشتباه است", {
             position: "bottom-left",
             autoClose: 4000,
             hideProgressBar: false,

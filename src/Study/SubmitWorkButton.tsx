@@ -26,6 +26,7 @@ export const SubmitWorkButton = () => {
           color="secondary"
           type="button"
           onClick={() => setOpen(true)}
+          style={{marginTop:"15px"}}
         >
           ثبت گزارش
         </Button>

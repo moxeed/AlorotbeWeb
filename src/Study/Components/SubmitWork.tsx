@@ -236,7 +236,7 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
       <Button
         style={{ margin: 20 }}
         variant="contained"
-        color="primary"
+        color="secondary"
         disabled={remainingCourses.length === 0}
         onClick={() => setOpen(true)}
       >

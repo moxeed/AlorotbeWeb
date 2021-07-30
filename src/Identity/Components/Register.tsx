@@ -6,7 +6,9 @@ import {
   FormControlLabel,
   Grid,
   Hidden,
+  IconButton,
   Input,
+  InputAdornment,
   InputLabel,
   makeStyles,
   Radio,
@@ -21,6 +23,8 @@ import SignIn from "../../Assets/SignIn.png";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { SetToken } from "../../Services/Identity";
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -98,6 +102,9 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
   );
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+
+  const [passwordShown, setPasswordShown] = useState(false);
+
   const steps = getSteps();
 
   useEffect(() => {
@@ -115,6 +122,9 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
     });
   }, [isDone]);
 
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
   const handleChangeString = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
@@ -155,9 +165,19 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                 <Input
                   onChange={handleChangeString}
                   value={form.password}
-                  type="password"
+                  type={passwordShown ? "text" : "password"}
                   name="password"
-                />
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={togglePasswordVisiblity}
+                    >
+                      {passwordShown ? <VisibilityIcon color="secondary"/> : <VisibilityOffIcon color="secondary"/>}
+                    </IconButton>
+                   </InputAdornment>
+                  }
+                /> 
               </FormControl>
             </Grid>
           </>
@@ -309,7 +329,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                   >
                     {supporters.map((item) => (
                       <MenuItem value={item.id}>
-                        {item.name + " " + item.lastName}
+                        {item.name}
                       </MenuItem>
                     ))}
                   </Select>

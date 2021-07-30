@@ -25,7 +25,7 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import PhoneCallbackIcon from "@material-ui/icons/PhoneCallback";
 import { useContext } from "react";
 import { IdentityContext } from "../App";
-
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 const useStyles = makeStyles((theme) => ({
   root1: {
     width: "80%",
@@ -51,7 +51,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    margin: "0 20px",
+    padding: "0 5px",
+    width:"120px"
   },
   links: {
     display: "flex",
@@ -188,6 +189,22 @@ export const MainHeader = () => {
             </ListItem>
 
             {isAuthenticated ? (
+            <>
+             <ListItem
+                button
+                component="a"
+                className={classes.service}
+                divider={true}
+              >
+                <ListItemIcon>
+                  <AccountCircleIcon />
+                </ListItemIcon>
+                <NavLink to="/Profile" style={{ color: "#555555" }}>
+                  <Typography variant="h6" className={classes.title}>
+                      پروفایل 
+                  </Typography>
+                </NavLink>
+              </ListItem>
               <ListItem
                 button
                 component="a"
@@ -198,11 +215,12 @@ export const MainHeader = () => {
                   <PowerSettingsNewIcon />
                 </ListItemIcon>
                 <Button color="inherit" onClick={() => setToken(null)}>
-                  <Typography variant="h6" className={classes.title}>
+                  <Typography variant="h6" className={classes.title} style={{width:"110px"}}>
                     خروج
                   </Typography>
                 </Button>
               </ListItem>
+            </>
             ) : (
               <>
                 <ListItem

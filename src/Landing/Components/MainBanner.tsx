@@ -4,7 +4,7 @@ import Banner from "../../Assets/banner.jpg";
 const useStyles = makeStyles({
   intro: {
     flexGrow: 1,
-    top: "250px",
+    top: "230px",
     position: "absolute",
     width: "80%",
     left: "50%",

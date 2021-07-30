@@ -56,7 +56,7 @@ export const ITimePicker = (prop: {
             </Grid>
           </Grid>
           <Button
-            color="primary"
+            color="secondary"
             variant="contained"
             onClick={() => {
               setOpen(false);
