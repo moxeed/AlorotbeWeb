@@ -160,7 +160,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             </Grid>
             <Grid>
               <FormControl className={classes.fullWidth} required>
-                <InputLabel className={classes.label}>رمز ورود(شامل عدد، حروف و کارکتر)</InputLabel>
+                <InputLabel className={classes.label}>رمز ورود</InputLabel>
                 <Input
                   onChange={handleChangeString}
                   value={form.password}
