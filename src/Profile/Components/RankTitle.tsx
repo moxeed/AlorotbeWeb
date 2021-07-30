@@ -16,10 +16,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     backgroundColor: theme.palette.background.paper,
   },
-  item: {
-    width: "100%",
-    borderRadius: "5px",
-    backgroundColor: "#2E8BC0",
+  item:{
+    width:"100%",
+    borderRadius:"5px",
+    backgroundColor:"#2E8BC0",
   },
   list: {},
 }));
@@ -38,56 +38,45 @@ export const RankTitle = () => {
     });
   }, []);
   return (
-    <Grid
-      item
-      container
-      xs={12}
-      spacing={1}
-      justify="center"
-      alignItems="center"
-    >
-      <Grid item xs={12} md={4}>
-        <ListItem className={classes.item}>
-          <ListItemAvatar>
-            <Avatar style={{ backgroundColor: "#B1D4E0" }}>
-              <ImageIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            style={{ textAlign: "right", color: "#fff" }}
-            primary=" رتبه کل"
-            secondary={rank}
-          />
-        </ListItem>
-      </Grid>
-      <Grid item xs={12} md={4}>
-        <ListItem className={classes.item}>
-          <ListItemAvatar>
-            <Avatar style={{ backgroundColor: "#B1D4E0" }}>
-              <CreateIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            style={{ textAlign: "right", color: "#fff" }}
-            primary="رتبه در تعداد تست"
-            secondary={test}
-          />
-        </ListItem>
-      </Grid>
-      <Grid item xs={12} md={4}>
-        <ListItem className={classes.item}>
-          <ListItemAvatar>
-            <Avatar style={{ backgroundColor: "#B1D4E0" }}>
-              <ImportContactsIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            style={{ textAlign: "right", color: "#fff" }}
-            primary="رتبه در ساعت مطالعه"
-            secondary={time}
-          />
-        </ListItem>
-      </Grid>
+    <Grid item container xs={12} spacing={1} justify="center" alignItems="center">
+        <Grid item xs={12} md={4}> 
+            <ListItem className={classes.item}>
+              <ListItemAvatar>
+                <Avatar style={{ backgroundColor: "#B1D4E0" }}>
+                  <ImageIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText style={{ textAlign: "right",color:"#fff" }} primary=" رتبه کل" secondary={rank}/>
+            </ListItem>
+        </Grid>
+        <Grid item xs={12} md={4}>
+            <ListItem className={classes.item}>
+              <ListItemAvatar>
+                <Avatar style={{ backgroundColor: "#B1D4E0" }}>
+                  <CreateIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                style={{ textAlign: "right",color:"#fff" }}
+                primary="رتبه در تعداد تست"
+                secondary={test}
+              />
+            </ListItem>
+        </Grid>
+        <Grid item xs={12} md={4}>
+            <ListItem className={classes.item}>
+              <ListItemAvatar>
+                <Avatar style={{ backgroundColor: "#B1D4E0" }}>
+                  <ImportContactsIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                style={{ textAlign: "right",color:"#fff" }}
+                primary="رتبه در ساعت مطالعه"
+                secondary={time}
+              />
+            </ListItem>
+        </Grid>
     </Grid>
   );
 };

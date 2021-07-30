@@ -41,8 +41,8 @@ export const TopPage = () => {
         >
           <Grid item style={{ paddingBottom: 20 }}>
             <h1> نفرات برتر الو رتبه </h1>
-            <Grid container justify="center" spacing={3}>
-              <Grid item>
+            <Grid container justify="center" spacing={0}>
+              <Grid item >
                 <Button
                   onClick={() => setCritiren(Critrien.Test)}
                   color="secondary"
@@ -51,7 +51,7 @@ export const TopPage = () => {
                   تعداد تست
                 </Button>
               </Grid>
-              <Grid item>
+              <Grid item >
                 <Button
                   onClick={() => setCritiren(Critrien.Time)}
                   color="secondary"
@@ -60,7 +60,7 @@ export const TopPage = () => {
                   مدت زمان مطالعه
                 </Button>
               </Grid>
-              <Grid item>
+              <Grid item > 
                 <Button
                   onClick={() => setCritiren(Critrien.Score)}
                   color="secondary"

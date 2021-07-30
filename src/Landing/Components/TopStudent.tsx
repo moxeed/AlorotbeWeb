@@ -22,7 +22,7 @@ export const TopStudentTest = () => {
     <Grid container className={classes.container}>
       <Grid item xs={12}>
         <Typography variant="h5" className={classes.title}>
-          برتر های این هفته
+          برتر های هفته
         </Typography>
       </Grid>
       <Grid
@@ -34,11 +34,11 @@ export const TopStudentTest = () => {
         alignItems="center"
         style={{ maxWidth: "1020px" }}
       >
-        <Top
-          period={Period.Week}
-          critrien={Critrien.Score}
-          count={15}
-          gradeId={null}
+        <Top 
+            period={Period.Week}
+            critrien={Critrien.Score}
+            count={15}
+            gradeId={null}
         />
       </Grid>
     </Grid>
