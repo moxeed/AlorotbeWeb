@@ -41,3 +41,7 @@
 .MuiListItem-secondaryAction {
   padding-right: 10px !important;
 }
+
+.MuiTypography-colorTextSecondary {
+  color: #fff !important;
+}

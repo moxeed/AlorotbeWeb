@@ -115,7 +115,7 @@ export const MainHeader = () => {
             </Button>
           </Hidden>
           <Link to="/" style={{ color: "#FD7D21" }}>
-            <Typography variant="h5" className={classes.title}>
+            <Typography variant="h5" className={classes.title} style={{ color: "#FD7D21" }}>
               الورتبه
             </Typography>
           </Link>

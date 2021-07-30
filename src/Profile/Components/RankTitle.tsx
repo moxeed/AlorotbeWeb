@@ -1,5 +1,4 @@
 /** @format */
-import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
@@ -41,7 +40,7 @@ export const RankTitle = () => {
     });
   }, []);
   return (
-    <Grid item container xs={12} md={7} spacing={1} style={{padding:"15px"}} justify="center" alignItems="center">
+    <Grid item container xs={12} spacing={1} justify="center" alignItems="center">
         <Grid item xs={12} md={4}> 
             <ListItem className={classes.item}>
               <ListItemAvatar>
@@ -49,7 +48,7 @@ export const RankTitle = () => {
                   <ImageIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText style={{ textAlign: "right",color:"#fff" }} primary=" کل" secondary={rank}/>
+              <ListItemText style={{ textAlign: "right",color:"#fff" }} primary=" رتبه کل" secondary={rank}/>
             </ListItem>
         </Grid>
         <Grid item xs={12} md={4}>
@@ -61,7 +60,7 @@ export const RankTitle = () => {
               </ListItemAvatar>
               <ListItemText
                 style={{ textAlign: "right",color:"#fff" }}
-                primary="  تعداد تست"
+                primary="رتبه در تعداد تست"
                 secondary={test}
               />
             </ListItem>
@@ -75,7 +74,7 @@ export const RankTitle = () => {
               </ListItemAvatar>
               <ListItemText
                 style={{ textAlign: "right",color:"#fff" }}
-                primary=" ساعت مطالعه"
+                primary="رتبه در ساعت مطالعه"
                 secondary={time}
               />
             </ListItem>

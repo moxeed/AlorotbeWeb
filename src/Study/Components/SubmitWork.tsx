@@ -7,6 +7,7 @@ import {
   makeStyles,
   Select,
   TextField,
+  Typography,
 } from "@material-ui/core";
 import { FormEvent, useEffect, useState } from "react";
 import { GetData, PostData } from "../../Services/ApiService";
@@ -14,11 +15,10 @@ import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfie
 import SentimentSatisfiedIcon from "@material-ui/icons/SentimentSatisfied";
 import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
-import { TimePicker } from "material-ui";
 import IModal from "../../Common/IModal";
 import { Course, CoursePicker } from "./CoursePicker";
 import { ITimePicker } from "./ITimePicker";
-import { timelineEnd } from "console";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles({
   header: {
@@ -54,7 +54,6 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
   const [selfEstimation, setSelfEstimation] = useState<number | null>(10);
   const [mood, setMood] = useState(0);
   const [awakeTime, setAwakeTime] = useState("");
-
   const [courses, setCourses] = useState([] as Array<Course>);
   const [remainingCourses, setRemainingCourses] = useState<Array<Course>>([]);
 
@@ -88,7 +87,17 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
         setCourses(res);
         handleAddCourse(res[0].id);
       })
-      .catch();
+      .catch(() => {
+        toast.error("مشکل در گرفتن برنامه!", {
+          position: "bottom-left",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   }, []);
 
   const handleStudyTimeChange = (time: string, index: number) => {
@@ -110,7 +119,7 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
     }
 
     if (
-      courseStudies.filter((c) => c.testCount === null || c.studyTime == "")
+      courseStudies.filter((c) => c.testCount === null || c.studyTime === "")
         .length > 0
     ) {
       setValid(false);
@@ -124,16 +133,34 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
       courseStudies,
     })
       .then(() => {
-        alert("ثبت شد");
+        toast.success("گزارش امروز ثبت شد", {
+          position: "bottom-left",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         prop.onFinish();
       })
-      .catch();
+      .catch(() => {
+        toast.error("مشکل در ثبت برنامه!", {
+          position: "bottom-left",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   const classes = useStyles();
   return (
     <Grid container justify="center">
-      <h3>ثبت برنامه امروز</h3>
+      <Typography variant="h5">ثبت برنامه امروز</Typography>
       <Grid container justify="center" spacing={3} style={{ padding: 10 }}>
         <Grid item>
           <Fab

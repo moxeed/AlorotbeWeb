@@ -4,13 +4,11 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import { Grid, ListItemSecondaryAction, Typography } from "@material-ui/core";
+import { Grid, ListItemSecondaryAction } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { GetData } from "../../Services/ApiService";
-import Banner from '../../Assets/report.png';
 import CallIcon from '@material-ui/icons/Call';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import InfoIcon from '@material-ui/icons/Info';
 import SchoolIcon from '@material-ui/icons/School';
 
