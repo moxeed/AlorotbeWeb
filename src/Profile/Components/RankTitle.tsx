@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   item:{
     width:"100%",
     borderRadius:"5px",
-    backgroundColor:"#FD7D21",
+    backgroundColor:"#2E8BC0",
   },
   list:{
 
@@ -44,7 +44,7 @@ export const RankTitle = () => {
         <Grid item xs={12} md={4}> 
             <ListItem className={classes.item}>
               <ListItemAvatar>
-                <Avatar style={{ backgroundColor: "#FD7D21" }}>
+                <Avatar style={{ backgroundColor: "#B1D4E0" }}>
                   <ImageIcon />
                 </Avatar>
               </ListItemAvatar>
@@ -54,7 +54,7 @@ export const RankTitle = () => {
         <Grid item xs={12} md={4}>
             <ListItem className={classes.item}>
               <ListItemAvatar>
-                <Avatar style={{ backgroundColor: "#FD7D21" }}>
+                <Avatar style={{ backgroundColor: "#B1D4E0" }}>
                   <CreateIcon />
                 </Avatar>
               </ListItemAvatar>
@@ -68,7 +68,7 @@ export const RankTitle = () => {
         <Grid item xs={12} md={4}>
             <ListItem className={classes.item}>
               <ListItemAvatar>
-                <Avatar style={{ backgroundColor: "#FD7D21" }}>
+                <Avatar style={{ backgroundColor: "#B1D4E0" }}>
                   <ImportContactsIcon />
                 </Avatar>
               </ListItemAvatar>
