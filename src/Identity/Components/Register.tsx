@@ -130,9 +130,8 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
   };
   const handleChangeInt = (e: FormEvent<{}>) => {
     const newForm = { ...form };
-    newForm[(e.target as HTMLInputElement).name] = Number(
-      (e.target as HTMLInputElement).value
-    );
+    newForm[(e.target as HTMLInputElement).name] = 
+    +(e.target as HTMLInputElement).value;
     setForm(newForm);
   };
   const handleChangeBool = (e: FormEvent<{}>) => {
@@ -322,16 +321,16 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                 <FormControl className={classes.fullWidth} required>
                   <InputLabel className={classes.label}>نام مشاور</InputLabel>
                   <Select
-                    value={form.suppporterId}
+                    value={+form.suppporterId}
                     name="suppporterId"
                     onChange={(e) => handleChangeInt(e)}
                     style={{ textAlign: "right" }}
                   >
-                    {supporters.map((item) => (
-                      <MenuItem value={item.id}>
+                    {supporters.map((item:any) => 
+                      <MenuItem value={item.supporterId}>
                         {item.name}
                       </MenuItem>
-                    ))}
+                    )}
                   </Select>
                 </FormControl>
               </Grid>
