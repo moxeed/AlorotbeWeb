@@ -23,8 +23,8 @@ import SignIn from "../../Assets/SignIn.png";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { SetToken } from "../../Services/Identity";
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -161,23 +161,29 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             </Grid>
             <Grid>
               <FormControl className={classes.fullWidth} required>
-                <InputLabel className={classes.label}>رمز ورود(شامل عدد، حروف و کارکتر)</InputLabel>
+                <InputLabel className={classes.label}>
+                  رمز ورود(شامل عدد، حروف و کارکتر ویژه (@!#))
+                </InputLabel>
                 <Input
                   onChange={handleChangeString}
                   value={form.password}
                   type={passwordShown ? "text" : "password"}
                   name="password"
-                  endAdornment={  
-                  <InputAdornment position="start">
-                  <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={togglePasswordVisiblity}
-                    >
-                      {passwordShown ? <VisibilityIcon color="secondary"/> : <VisibilityOffIcon color="secondary"/>}
+                  endAdornment={
+                    <InputAdornment position="start">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={togglePasswordVisiblity}
+                      >
+                        {passwordShown ? (
+                          <VisibilityIcon color="secondary" />
+                        ) : (
+                          <VisibilityOffIcon color="secondary" />
+                        )}
                       </IconButton>
-                  </InputAdornment>
+                    </InputAdornment>
                   }
-                /> 
+                />
               </FormControl>
             </Grid>
           </>
@@ -207,7 +213,9 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             </Grid>
             <Grid>
               <FormControl className={classes.fullWidth} required>
-                <InputLabel className={classes.label}>شماره تماس(دوازده رقم)</InputLabel>
+                <InputLabel className={classes.label}>
+                  شماره تماس(دوازده رقم)
+                </InputLabel>
                 <Input
                   onChange={handleChangeString}
                   value={form.phoneNumber}
@@ -328,9 +336,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                     style={{ textAlign: "right" }}
                   >
                     {supporters.map((item) => (
-                      <MenuItem value={item.id}>
-                        {item.name}
-                      </MenuItem>
+                      <MenuItem value={item.id}>{item.name}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>
@@ -451,7 +457,9 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                 </div>
               </div>
             </div>
-            <NavLink to="/Identity/Login" style={{color: "#FD7D21"}}>حساب دارید؟ وارد شوید</NavLink>
+            <NavLink to="/Identity/Login" style={{ color: "#FD7D21" }}>
+              حساب دارید؟ وارد شوید
+            </NavLink>
           </Grid>
         </Paper>
       </Grid>
