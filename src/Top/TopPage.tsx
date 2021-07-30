@@ -12,8 +12,8 @@ interface Grade {
 }
 
 export const TopPage = () => {
-  const [critiren, setCritiren] = useState(Critrien.Test);
-  const [period, setPeriod] = useState<Period>(Period.Day);
+  const [critiren, setCritiren] = useState(Critrien.Score);
+  const [period, setPeriod] = useState<Period>(Period.Week);
   const [grade, setGrade] = useState<number>(-1);
   const [grades, setGrades] = useState<Array<Grade>>([]);
 
@@ -41,30 +41,39 @@ export const TopPage = () => {
         >
           <Grid item style={{ paddingBottom: 20 }}>
             <h1> نفرات برتر الو رتبه </h1>
-            <Grid container justify="center" spacing={0}>
-              <Grid item >
+            <Grid container justify="center">
+              <Grid item>
                 <Button
+                  style={{ margin: 10 }}
                   onClick={() => setCritiren(Critrien.Test)}
                   color="secondary"
-                  variant="contained"
+                  variant={
+                    critiren === Critrien.Test ? "contained" : "outlined"
+                  }
                 >
                   تعداد تست
                 </Button>
               </Grid>
-              <Grid item >
+              <Grid item>
                 <Button
                   onClick={() => setCritiren(Critrien.Time)}
+                  style={{ margin: 10 }}
                   color="secondary"
-                  variant="contained"
+                  variant={
+                    critiren === Critrien.Time ? "contained" : "outlined"
+                  }
                 >
                   مدت زمان مطالعه
                 </Button>
               </Grid>
-              <Grid item > 
+              <Grid item>
                 <Button
+                  style={{ margin: 10 }}
                   onClick={() => setCritiren(Critrien.Score)}
                   color="secondary"
-                  variant="contained"
+                  variant={
+                    critiren === Critrien.Score ? "contained" : "outlined"
+                  }
                 >
                   امتیاز
                 </Button>
