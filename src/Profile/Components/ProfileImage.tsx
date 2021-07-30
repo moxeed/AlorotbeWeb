@@ -33,8 +33,8 @@ export const ProfileImage = () => {
   const input = React.createRef<HTMLInputElement>();
 
   return (
-    <Grid xs={12} justify="center" container>
-      <Grid xs={12}>
+    <Grid xs={12} justify="center" alignItems="center" container>
+      <Grid xs={6}>
         <Avatar
           src={
             edit && file && file !== null
@@ -46,7 +46,7 @@ export const ProfileImage = () => {
           size={150}
         />
       </Grid>
-      <Grid>
+      <Grid xs={6}>
         {edit ? (
           <>
             <input
@@ -62,7 +62,7 @@ export const ProfileImage = () => {
               style={{ margin: 10 }}
               onClick={() => input.current?.click()}
               variant="contained"
-              color="primary"
+              color="secondary"
             >
               انتخاب فایل
             </Button>
@@ -70,7 +70,7 @@ export const ProfileImage = () => {
               style={{ margin: 10 }}
               onClick={handleSubmit}
               variant="contained"
-              color="primary"
+              color="secondary"
             >
               {sending ? <CircularProgress size={20} /> : "ارسال"}
             </Button>
@@ -80,7 +80,7 @@ export const ProfileImage = () => {
             variant="contained"
             style={{ margin: 10 }}
             onClick={() => setEdit(true)}
-            color="primary"
+            color="secondary"
           >
             ویرایش
           </Button>

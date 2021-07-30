@@ -21,7 +21,6 @@ import { WithMenu } from "./Common/WithMenu";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Profile } from "./Profile/Profile";
-import { ProfileImage } from "./Profile/Components/ProfileImage";
 
 const theme = createTheme({
   palette: {
@@ -49,7 +48,6 @@ function App() {
       <MuiThemeProvider>
         <StylesProvider jss={jss}>
           <ThemeProvider theme={theme}>
-            <ProfileImage />
             <IdentityContext.Provider
               value={{ isAuthenticated: token !== null, token, setToken }}
             >

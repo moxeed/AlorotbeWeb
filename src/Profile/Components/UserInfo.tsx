@@ -11,6 +11,7 @@ import { GetData } from "../../Services/ApiService";
 import CallIcon from '@material-ui/icons/Call';
 import InfoIcon from '@material-ui/icons/Info';
 import SchoolIcon from '@material-ui/icons/School';
+import { ProfileImage } from "./ProfileImage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +35,9 @@ export const UserInfo = () => {
         <Grid item xs={12} style={{padding:"2px 8px"}}>
             <Grid item xs={12}  container justify="center" alignItems="center">
                 <List className={classes.root}>
+                    <ListItem>
+                        <ProfileImage/>
+                    </ListItem>
                     <ListItem>
                         <ListItemAvatar>
                         <Avatar style={{ backgroundColor: "#FD7D21" }}>
