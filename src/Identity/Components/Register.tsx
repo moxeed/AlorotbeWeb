@@ -167,15 +167,15 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                   value={form.password}
                   type={passwordShown ? "text" : "password"}
                   name="password"
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <IconButton
+                  endAdornment={  
+                  <InputAdornment position="start">
+                  <IconButton
                       aria-label="toggle password visibility"
                       onClick={togglePasswordVisiblity}
                     >
                       {passwordShown ? <VisibilityIcon color="secondary"/> : <VisibilityOffIcon color="secondary"/>}
-                    </IconButton>
-                   </InputAdornment>
+                      </IconButton>
+                  </InputAdornment>
                   }
                 /> 
               </FormControl>

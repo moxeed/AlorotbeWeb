@@ -38,3 +38,6 @@
   color: #fff;
   background-color: #fd7d21 !important;
 }
+.MuiListItem-secondaryAction {
+  padding-right: 10px !important;
+}

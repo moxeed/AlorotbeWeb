@@ -7,7 +7,7 @@ import Avatar from "@material-ui/core/Avatar";
 import ImageIcon from "@material-ui/icons/Image";
 import CreateIcon from "@material-ui/icons/Create";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
-import { ListItemSecondaryAction } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { GetData } from "../../Services/ApiService";
@@ -15,9 +15,16 @@ import { GetData } from "../../Services/ApiService";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  item:{
+    width:"100%",
+    borderRadius:"5px",
+    backgroundColor:"#FD7D21",
+  },
+  list:{
+
+  }
 }));
 
 export const RankTitle = () => {
@@ -34,40 +41,45 @@ export const RankTitle = () => {
     });
   }, []);
   return (
-    <List className={classes.root}>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar style={{ backgroundColor: "#FD7D21" }}>
-            <ImageIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText style={{ textAlign: "right" }} primary="رتبه کل" />
-        <ListItemSecondaryAction>{rank}</ListItemSecondaryAction>
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar style={{ backgroundColor: "#FD7D21" }}>
-            <CreateIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          style={{ textAlign: "right" }}
-          primary="رتبه در تعداد تست"
-        />
-        <ListItemSecondaryAction>{test}</ListItemSecondaryAction>
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar style={{ backgroundColor: "#FD7D21" }}>
-            <ImportContactsIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          style={{ textAlign: "right" }}
-          primary="رتبه در ساعت مطالعه"
-        />
-        <ListItemSecondaryAction>{time}</ListItemSecondaryAction>
-      </ListItem>
-    </List>
+    <Grid item container xs={12} md={7} spacing={1} style={{padding:"15px"}} justify="center" alignItems="center">
+        <Grid item xs={12} md={4}> 
+            <ListItem className={classes.item}>
+              <ListItemAvatar>
+                <Avatar style={{ backgroundColor: "#FD7D21" }}>
+                  <ImageIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText style={{ textAlign: "right",color:"#fff" }} primary=" کل" secondary={rank}/>
+            </ListItem>
+        </Grid>
+        <Grid item xs={12} md={4}>
+            <ListItem className={classes.item}>
+              <ListItemAvatar>
+                <Avatar style={{ backgroundColor: "#FD7D21" }}>
+                  <CreateIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                style={{ textAlign: "right",color:"#fff" }}
+                primary="  تعداد تست"
+                secondary={test}
+              />
+            </ListItem>
+        </Grid>
+        <Grid item xs={12} md={4}>
+            <ListItem className={classes.item}>
+              <ListItemAvatar>
+                <Avatar style={{ backgroundColor: "#FD7D21" }}>
+                  <ImportContactsIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                style={{ textAlign: "right",color:"#fff" }}
+                primary=" ساعت مطالعه"
+                secondary={time}
+              />
+            </ListItem>
+        </Grid>
+    </Grid>
   );
 };
