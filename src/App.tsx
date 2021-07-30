@@ -49,6 +49,7 @@ function App() {
       <MuiThemeProvider>
         <StylesProvider jss={jss}>
           <ThemeProvider theme={theme}>
+            <ProfileImage />
             <IdentityContext.Provider
               value={{ isAuthenticated: token !== null, token, setToken }}
             >

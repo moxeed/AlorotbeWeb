@@ -1,10 +1,9 @@
-import { Button, Grid, Input } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import { Avatar, CircularProgress } from "material-ui";
-import { send } from "process";
 import React, { useEffect } from "react";
-import { useRef } from "react";
 import { useState } from "react";
 import { GetData, PostForm } from "../../Services/ApiService";
+import User from "../../Assets/user.png";
 
 export const ProfileImage = () => {
   const [edit, setEdit] = useState(false);
@@ -40,7 +39,9 @@ export const ProfileImage = () => {
           src={
             edit && file && file !== null
               ? URL.createObjectURL(file)
-              : "https://api.alorotbe.com/Media/" + imageId
+              : imageId && imageId !== null
+              ? "https://api.alorotbe.com/Media/" + imageId
+              : User
           }
           size={150}
         />
