@@ -12,13 +12,15 @@ import {
 import { MuiThemeProvider } from "material-ui/styles";
 import { SubmitWorkWrapper } from "./Study/SubmitWorkWrapper";
 import { Footer } from "./Layout/Footer";
-
 import { create } from "jss";
 import rtl from "jss-rtl";
 import { createContext } from "react";
 import { useState } from "react";
 import { TokenManager } from "./Identity/Components/TokenManager";
 import { WithMenu } from "./Common/WithMenu";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { Profile } from "./Profile/Profile";
 
 const theme = createTheme({
   palette: {
@@ -52,6 +54,7 @@ function App() {
               <TokenManager />
               <BrowserRouter>
                 <Switch>
+                  <Route path="/Profile" component={() => WithMenu(Profile)} />
                   <Route path="/Identity" component={IdentityPage} />
                   <Route path="/Top" component={() => WithMenu(TopPage)} />
                   <Route path="/" component={() => WithMenu(LandingPage)} />
@@ -65,6 +68,7 @@ function App() {
         </StylesProvider>
       </MuiThemeProvider>
       <Footer />
+      <ToastContainer/>
     </div>
   );
 }

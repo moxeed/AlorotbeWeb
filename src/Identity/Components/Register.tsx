@@ -19,6 +19,8 @@ import React, { useState, FC, FormEvent, useEffect } from "react";
 import { PostData, GetData } from "../../Services/ApiService";
 import SignIn from "../../Assets/SignIn.png";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
+import { SetToken } from "../../Services/Identity";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,8 +33,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   header: {
-    textAlign: "right",
-    color: "#D36F26",
+    textAlign: "left",
     padding: "0 30px",
     fontSize: "28px",
     marginBottom: 10,
@@ -54,9 +55,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   label: {
-    left: "auto",
     paddingRight: 5,
-    right: "0 !important",
     color: "#FD7D21 !important",
   },
   RadioBtns: {
@@ -152,7 +151,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             </Grid>
             <Grid>
               <FormControl className={classes.fullWidth} required>
-                <InputLabel className={classes.label}>رمز ورود</InputLabel>
+                <InputLabel className={classes.label}>رمز ورود(شامل عدد، حروف و کارکتر)</InputLabel>
                 <Input
                   onChange={handleChangeString}
                   value={form.password}
@@ -188,7 +187,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             </Grid>
             <Grid>
               <FormControl className={classes.fullWidth} required>
-                <InputLabel className={classes.label}>شماره تماس</InputLabel>
+                <InputLabel className={classes.label}>شماره تماس(دوازده رقم)</InputLabel>
                 <Input
                   onChange={handleChangeString}
                   value={form.phoneNumber}
@@ -340,25 +339,40 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
 
   const handleSubmit = () => {
     if (
-      true
-      // form.userName !== "" &&
-      // form.password !== "" &&
-      // form.name !== "" &&
-      // form.lastName !== "" &&
-      // form.phoneNumber !== "" &&
-      // form.majorId !== 0 &&
-      // form.gradeId !== 0
+      form.userName !== "" &&
+      form.password !== "" &&
+      form.name !== "" &&
+      form.lastName !== "" &&
+      form.phoneNumber !== "" &&
+      form.majorId !== 0 &&
+      form.gradeId !== 0
     ) {
       PostData("Identity/Register", form)
-        .then(() => {
+        .then((res) => {
           setIsDone(true);
+          SetToken(res?.token);
         })
         .catch((error) => {
-          console.log(error);
-          alert("اطلاعات تکمیل نیست");
+          toast.error(error[0].description, {
+            position: "bottom-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         });
     } else {
-      alert("بعضی از اطلاعات ضروری ناقص وارد شده است.");
+      toast.warn("برخی فیلد های ضروری ناقص است", {
+        position: "bottom-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -417,7 +431,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                 </div>
               </div>
             </div>
-            <NavLink to="/Identity/Login">حساب دارید؟ وارد شوید</NavLink>
+            <NavLink to="/Identity/Login" style={{color: "#FD7D21"}}>حساب دارید؟ وارد شوید</NavLink>
           </Grid>
         </Paper>
       </Grid>

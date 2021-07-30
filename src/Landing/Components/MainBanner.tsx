@@ -37,7 +37,7 @@ export const MainBanner = () => {
           <Typography
             style={{ color: "#666666", fontSize: "15px", marginTop: "20px" }}
           >
-            تضمین موفقیت در دوران تحصیلی شما
+            اینجا کنکور بهت خوش میگذره!
           </Typography>
         </div>
       </div>

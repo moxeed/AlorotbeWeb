@@ -16,7 +16,6 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
 } from "@material-ui/core";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import { useState } from "react";
@@ -125,13 +124,20 @@ export const MainHeader = () => {
                 لیست برتر ها
               </Typography>
             </Link>
-            {isAuthenticated ? (
-              <Button color="inherit" onClick={() => setToken(null)}>
-                <Typography variant="h6" className={classes.title}>
-                  خروج
-                </Typography>
-              </Button>
-            ) : (
+            {isAuthenticated ? 
+              <>
+                <NavLink to="/Profile" style={{ color: "#555555" }}>
+                  <Typography variant="h6" className={classes.title}>
+                    پروفایل
+                  </Typography>
+                </NavLink>
+                <Button color="inherit" onClick={() => setToken(null)}>
+                  <Typography variant="h6" className={classes.title}>
+                    خروج
+                  </Typography>
+                </Button>
+              </>
+               : (
               <>
                 <NavLink to="/Identity/Login" style={{ color: "#555555" }}>
                   <Typography variant="h6" className={classes.title}>
