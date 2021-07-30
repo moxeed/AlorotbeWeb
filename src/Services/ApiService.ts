@@ -26,3 +26,16 @@ export const PostData = async (url: string, body: any) => {
   if (data.status < 400) return json;
   throw json;
 };
+
+export const PostForm = async (url: string, form: FormData) => {
+  const data = await fetch(BaseUrl + url, {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + GetToken(),
+    },
+    body: form,
+  });
+
+  if (data.status < 400) return data.status;
+  throw data.status;
+};

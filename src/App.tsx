@@ -21,6 +21,7 @@ import { WithMenu } from "./Common/WithMenu";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Profile } from "./Profile/Profile";
+import { ProfileImage } from "./Profile/Components/ProfileImage";
 
 const theme = createTheme({
   palette: {
@@ -68,7 +69,7 @@ function App() {
         </StylesProvider>
       </MuiThemeProvider>
       <Footer />
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }
