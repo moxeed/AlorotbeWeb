@@ -16,28 +16,12 @@ export const IdentityPage = () => {
   const history = useHistory();
   useEffect(() => {
     if (isDone === true) {
-      setTimeout(() => {
         history.push("/");
-      }, 5000);
-    }
+      }
   }, [isDone]);
 
   return (
     <Grid container justify="center">
-      <div
-        className={isDone === true ? "RedirectIdentity" : "DisplayNoneIdentity"}
-      >
-        <img
-          width="100%"
-          height="auto"
-          className="RedirectPicture"
-          src={RedirectImg}
-          alt="banner"
-        />
-        <div className={"RedirectButton"}>
-          <LoadingRedirect />
-        </div>
-      </div>
       <Router history={useHistory()}>
         <Route
           path="/Identity/Login"

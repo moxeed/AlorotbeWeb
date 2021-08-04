@@ -225,7 +225,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
 
             <Grid>
               <FormControl className={classes.fullWidth}>
-                <InputLabel className={classes.label}>شهر محل سکونت</InputLabel>
+                <InputLabel className={classes.label}>استان محل سکونت</InputLabel>
                 <Select
                   value={form.cityId}
                   name="cityId"
