@@ -79,17 +79,17 @@ const initValue: { [index: string]: any } = {
   name: "",
   lastName: "",
   phoneNumber: "",
-  avgLevel: 0,
-  gpa: 0,
+  avgLevel: null,
+  gpa: null,
   hasSupporter: false,
   cityId: 1,
   majorId: 0,
   gradeId: 0,
   suppporterId: null,
 };
-
 export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
   const [form, setForm] = useState(initValue);
+  console.log(form);
   const [grades, setGrades] = useState(
     [] as Array<{ id: number; name: string }>
   );
