@@ -36,10 +36,11 @@ export const Reports = () => {
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState<Array<any>>([]);
   useEffect(() => {
-    GetData("Planning/Study/30").then((res) => {
+    GetData("Planning/Study/10").then((res) => {
       setReport(res);
     });
   }, []);
+  
   console.log(reports);
   return (
     <>

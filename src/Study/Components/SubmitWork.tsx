@@ -15,10 +15,10 @@ import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfie
 import SentimentSatisfiedIcon from "@material-ui/icons/SentimentSatisfied";
 import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
-import IModal from "../../Common/IModal";
-import { Course, CoursePicker } from "./CoursePicker";
+import { Course } from "./CoursePicker";
 import { ITimePicker } from "./ITimePicker";
 import { toast } from "react-toastify";
+import { MenuItem } from "material-ui";
 
 const useStyles = makeStyles({
   header: {
@@ -49,43 +49,40 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
       testCount: number | null;
       studyTime: string;
       courseId: number | null;
+      name: string;
     }>
   );
   const [selfEstimation, setSelfEstimation] = useState<number | null>(10);
   const [mood, setMood] = useState(0);
   const [awakeTime, setAwakeTime] = useState("");
   const [courses, setCourses] = useState([] as Array<Course>);
-  const [remainingCourses, setRemainingCourses] = useState<Array<Course>>([]);
-
-  const [open, setOpen] = useState(false);
   const [isValid, setValid] = useState<boolean>(true);
-  const handleAddCourse = (courseId: number | null) => {
-    if (courseId === null) return;
+  
+  let remainingCourses = courses.filter(
+    (c) => courseStudies.filter((cs) => cs.courseId == c.id).length === 0
+  );
+
+  const handleAddCourse = () => {
+    if(!remainingCourses[0]) return;
 
     const newState = [
       ...courseStudies,
       {
         testCount: null,
         studyTime: "",
-        courseId: courseId,
+        courseId: remainingCourses[0].id,
+        name: remainingCourses[0].name
       },
     ];
-    setOpen(false);
     setStudies(newState);
   };
-
-  useEffect(() => {
-    const newRemainingCourses = [...courses].filter(
-      (c) => courseStudies.filter((cs) => cs.courseId == c.id).length === 0
-    );
-    setRemainingCourses(newRemainingCourses);
-  }, [courseStudies, courses]);
 
   useEffect(() => {
     GetData("BasicInfo/Course")
       .then((res) => {
         setCourses(res);
-        handleAddCourse(res[0].id);
+        remainingCourses = res;
+        handleAddCourse();
       })
       .catch(() => {
         toast.error("مشکل در گرفتن برنامه!", {
@@ -109,6 +106,16 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
   const handleTestCountChange = (e: FormEvent<{}>, index: number) => {
     const newState = [...courseStudies];
     newState[index].testCount = +(e.target as HTMLInputElement).value;
+    setStudies(newState);
+  };
+
+  const handleCourseChange = (e: FormEvent<{}>, index: number) => {
+    const newState = [...courseStudies];
+    const courseId = +(e.target as HTMLInputElement).value;
+    const course = courses.find(c => c.id === courseId)
+    if (!course) return;
+    newState[index].courseId = courseId;
+    newState[index].name = course.name;
     setStudies(newState);
   };
 
@@ -213,7 +220,11 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
             error={selfEstimation === null && !isValid}
             label="ارزیابی از خود"
             onChange={(e) =>
-              setSelfEstimation(+(e.target as HTMLInputElement).value)
+              {
+                const rate = +(e.target as HTMLInputElement).value;
+                if (rate > 0 && rate < 11)
+                setSelfEstimation(rate);
+              }
             }
             value={selfEstimation}
             type="number"
@@ -227,15 +238,16 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
               <FormControl className={classes.fullWidth}>
                 <InputLabel>درس</InputLabel>
                 <Select
-                  disabled
+                  onChange={(e) => handleCourseChange(e, index)}
                   error={s.courseId === null}
                   key={index}
                   value={s.courseId}
                   label="درس"
                 >
-                  {courses.map((c) => (
-                    <option value={c.id}>{c.name}</option>
-                  ))}
+                  {remainingCourses.map((c) => (
+                    <MenuItem value={c.id}>{c.name}</MenuItem>
+                    ))}
+                  <MenuItem value={s.courseId}>{s.name}</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -265,16 +277,10 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
         variant="contained"
         color="secondary"
         disabled={remainingCourses.length === 0}
-        onClick={() => setOpen(true)}
+        onClick={handleAddCourse}
       >
         افزودن درس
       </Button>
-      <IModal open={open} onClose={() => setOpen(false)}>
-        <CoursePicker
-          courses={remainingCourses}
-          onCourseSelect={handleAddCourse}
-        />
-      </IModal>
       <Button
         color="secondary"
         style={{ margin: 20 }}

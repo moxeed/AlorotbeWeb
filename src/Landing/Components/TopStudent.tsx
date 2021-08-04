@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     transform: "rotate(0deg)",
-    fontSize: "18px",
+    fontSize: "20px",
     marginTop: "40px",
   },
 }));

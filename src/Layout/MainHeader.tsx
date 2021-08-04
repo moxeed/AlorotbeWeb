@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     padding: "0 5px",
-    width:"120px"
+    width:"150px"
   },
   links: {
     display: "flex",

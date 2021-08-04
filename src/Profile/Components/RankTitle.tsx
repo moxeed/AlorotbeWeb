@@ -3,9 +3,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import ImageIcon from "@material-ui/icons/Image";
+import CallMadeIcon from "@material-ui/icons/CallMade";
 import CreateIcon from "@material-ui/icons/Create";
-import ImportContactsIcon from "@material-ui/icons/ImportContacts";
+import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import { Grid } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -43,7 +43,7 @@ export const RankTitle = () => {
             <ListItem className={classes.item}>
               <ListItemAvatar>
                 <Avatar style={{ backgroundColor: "#B1D4E0" }}>
-                  <ImageIcon />
+                  <CallMadeIcon color="primary"/>
                 </Avatar>
               </ListItemAvatar>
               <ListItemText style={{ textAlign: "right",color:"#fff" }} primary=" رتبه کل" secondary={rank}/>
@@ -53,7 +53,7 @@ export const RankTitle = () => {
             <ListItem className={classes.item}>
               <ListItemAvatar>
                 <Avatar style={{ backgroundColor: "#B1D4E0" }}>
-                  <CreateIcon />
+                  <CreateIcon color="primary"/>
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
@@ -67,7 +67,7 @@ export const RankTitle = () => {
             <ListItem className={classes.item}>
               <ListItemAvatar>
                 <Avatar style={{ backgroundColor: "#B1D4E0" }}>
-                  <ImportContactsIcon />
+                  <QueryBuilderIcon  color="primary"/>
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
