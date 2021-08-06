@@ -83,9 +83,11 @@ const initValue: { [index: string]: any } = {
   gpa: 0,
   hasSupporter: false,
   cityId: 1,
+  stateId: 1,
   majorId: 0,
   gradeId: 0,
   suppporterId: null,
+  supporterName: null,
 };
 
 export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
@@ -94,6 +96,9 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
     [] as Array<{ id: number; name: string }>
   );
   const [majors, setMajors] = useState(
+    [] as Array<{ id: number; name: string }>
+  );
+  const [states, setStates] = useState(
     [] as Array<{ id: number; name: string }>
   );
   const [city, setCity] = useState([] as Array<{ id: number; name: string }>);
@@ -114,13 +119,19 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
     GetData("BasicInfo/Major").then((res) => {
       setMajors(res);
     });
-    GetData("BasicInfo/City").then((res) => {
-      setCity(res);
+    GetData("BasicInfo/State").then((res) => {
+      setStates(res);
     });
     GetData("Identity/Supporter").then((res) => {
       setSupporters(res);
     });
   }, [isDone]);
+
+  useEffect(() => {
+    GetData("BasicInfo/City/" + form.stateId).then((res) => {
+      setCity(res);
+    });
+  }, [form.stateId]);
 
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
@@ -221,7 +232,23 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                 />
               </FormControl>
             </Grid>
-
+            <Grid>
+              <FormControl className={classes.fullWidth}>
+                <InputLabel className={classes.label}>
+                  استان محل سکونت
+                </InputLabel>
+                <Select
+                  value={form.stateId}
+                  name="stateId"
+                  onChange={(e) => handleChangeInt(e)}
+                  style={{ textAlign: "right" }}
+                >
+                  {states.map((item) => (
+                    <MenuItem value={item.id}>{item.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
             <Grid>
               <FormControl className={classes.fullWidth}>
                 <InputLabel className={classes.label}>شهر محل سکونت</InputLabel>
@@ -302,7 +329,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
               <FormControl className={classes.fullWidth}>
                 <InputLabel className={classes.label}>
                   {" "}
-                  آیا مشاور دارید؟
+                  آیا مشاور می خواهید؟
                 </InputLabel>
                 <RadioGroup
                   name="hasSupporter"
@@ -332,11 +359,16 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                     name="suppporterId"
                     onChange={(e) => handleChangeInt(e)}
                     style={{ textAlign: "right" }}
-                  >
-                    {supporters.map((item: any) => (
-                      <MenuItem value={item.supporterId}>{item.name}</MenuItem>
-                    ))}
-                  </Select>
+                  ></Select>
+                  <FormControl className={classes.fullWidth}>
+                    <InputLabel className={classes.label}>نام مشاور</InputLabel>
+                    <Input
+                      onChange={handleChangeString}
+                      type="text"
+                      value={form.supporterName}
+                      name="supporterName"
+                    />
+                  </FormControl>
                 </FormControl>
               </Grid>
             ) : null}

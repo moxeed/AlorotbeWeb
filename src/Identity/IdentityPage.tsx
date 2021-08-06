@@ -10,15 +10,12 @@ import { useEffect, useState } from "react";
 import { LoadingRedirect } from "./Loading/Loading";
 import { useHistory } from "react-router-dom";
 
-
 export const IdentityPage = () => {
   const [isDone, setIsDone] = useState(false);
   const history = useHistory();
   useEffect(() => {
     if (isDone === true) {
-      setTimeout(() => {
-        history.push("/");
-      }, 5000);
+      history.push("/");
     }
   }, [isDone]);
 
