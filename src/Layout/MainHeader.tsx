@@ -52,14 +52,19 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     padding: "0 5px",
-    width:"150px"
+    width:"150px",
+    "&:hover":{
+      opacity:"80%",
+    },
   },
   links: {
     display: "flex",
     justifyContent: "left",
     minHeight: "70px",
     alignItems: "center",
+   
   },
+ 
   drawerPaper: {
     width: "100%",
     maxWidth: "300px",
@@ -92,7 +97,8 @@ export const MainHeader = () => {
 
   return (
     <>
-      <Router history={useHistory()}>
+    {/*
+    <Router history={useHistory()}>
         <Route path="/" exact>
           <Grid container className={classes.root2}>
             <div>
@@ -105,7 +111,9 @@ export const MainHeader = () => {
             </div>
           </Grid>
         </Route>
-      </Router>
+      </Router> 
+    */}
+      
 
       <AppBar position="sticky" color="inherit" className={classes.root1}>
         <nav className={classes.links}>
