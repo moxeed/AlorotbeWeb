@@ -1,9 +1,11 @@
 /** @format */
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { IdentityContext } from "../../App";
 import Banner from "../../Assets/Study.jpg";
+import { GetData } from "../../Services/ApiService";
 import { SubmitWorkButton } from "../../Study/SubmitWorkButton";
 import { MyRank } from "./MyRank";
 
@@ -24,8 +26,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const StudentStatus = () => {
   const { isAuthenticated } = useContext(IdentityContext);
+  const [info, setInfo] = useState<any>();
+  
+  useEffect(() => {
+    GetData("Identity/UserInfo").then((res) => {
+      setInfo(res);
+    });
+  }, []);
+  
   const classes = useStyles();
-
   return (
     <Grid container>
       <Grid
@@ -40,7 +49,7 @@ export const StudentStatus = () => {
       >
         <Grid item>
           <Typography variant="h5">
-            <span style={{ color: "#FD7D21" }}>دوست عزیز</span>، به پنل خودت خوش
+            <span style={{ color: "#FD7D21" }}>{info? info.name + " " + info.lastName : "دوست"} عزیز</span>، به پنل خودت خوش
             اومدی!
           </Typography>
         </Grid>

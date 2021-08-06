@@ -17,14 +17,14 @@ import {
 } from "@material-ui/core";
 import { Typography, StepLabel, Step, Stepper } from "@material-ui/core";
 import { MenuItem, Paper } from "material-ui";
-import React, { useState, FC, FormEvent, useEffect } from "react";
+import React, { useState, FC, FormEvent, useEffect, useContext } from "react";
 import { PostData, GetData } from "../../Services/ApiService";
 import SignIn from "../../Assets/SignIn.png";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
-import { SetToken } from "../../Services/Identity";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import { IdentityContext } from "../../App";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,8 +79,8 @@ const initValue: { [index: string]: any } = {
   name: "",
   lastName: "",
   phoneNumber: "",
-  avgLevel: 0,
-  gpa: 0,
+  avgLevel: null,
+  gpa: null,
   hasSupporter: false,
   cityId: 1,
   stateId: 1,
@@ -89,9 +89,9 @@ const initValue: { [index: string]: any } = {
   suppporterId: null,
   supporterName: null,
 };
-
 export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
   const [form, setForm] = useState(initValue);
+  console.log(form);
   const [grades, setGrades] = useState(
     [] as Array<{ id: number; name: string }>
   );
@@ -109,6 +109,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
   const [skipped, setSkipped] = React.useState(new Set());
 
   const [passwordShown, setPasswordShown] = useState(false);
+  const { setToken } = useContext(IdentityContext);
 
   const steps = getSteps();
 
@@ -223,7 +224,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             <Grid>
               <FormControl className={classes.fullWidth} required>
                 <InputLabel className={classes.label}>
-                  شماره تماس(دوازده رقم)
+                  شماره تماس(یازده رقم)
                 </InputLabel>
                 <Input
                   onChange={handleChangeString}
@@ -251,7 +252,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             </Grid>
             <Grid>
               <FormControl className={classes.fullWidth}>
-                <InputLabel className={classes.label}>شهر محل سکونت</InputLabel>
+                <InputLabel className={classes.label}>استان محل سکونت</InputLabel>
                 <Select
                   value={form.cityId}
                   name="cityId"
@@ -406,7 +407,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
       PostData("Identity/Register", form)
         .then((res) => {
           setIsDone(true);
-          SetToken(res?.token);
+          setToken(res?.token);
         })
         .catch((error) => {
           toast.error(error[0].description, {

@@ -8,7 +8,7 @@ export const LoadingRedirect = () => {
     <>
       <div className={"sub-Loading"}>به</div>
       <Typography className={"Title-Loading"}>الورتبه</Typography>
-      <div id="load">
+      <div>
         <div>آمدید </div>
         <div> خوش</div>
       </div>
