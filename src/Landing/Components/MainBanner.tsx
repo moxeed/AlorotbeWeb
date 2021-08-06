@@ -4,7 +4,7 @@ import Banner from "../../Assets/banner.jpg";
 const useStyles = makeStyles({
   intro: {
     flexGrow: 1,
-    top: "230px",
+    top: "150px",
     position: "absolute",
     width: "80%",
     left: "50%",
@@ -35,7 +35,7 @@ export const MainBanner = () => {
             الورتبه
           </Typography>
           <Typography
-            style={{ color: "#666666", fontSize: "15px", marginTop: "20px" }}
+            style={{ color: "#666666", fontSize: "15px", marginTop: "10px" }}
           >
             اینجا کنکور بهت خوش میگذره!
           </Typography>

@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sizeIcon: {
     fontSize: "1rem",
+    paddingTop:"5px",
   },
 }));
 export const Footer = () => {
@@ -41,7 +42,7 @@ export const Footer = () => {
           <Typography>الورتبه در شبکه های مجازی</Typography>
           <Divider style={{ marginTop: "5px" }} />
         </Grid>
-        <Grid item xs={11} md={8} container alignItems="center">
+        <Grid item xs={11} md={8} container alignItems="center" >
           <Typography style={{ padding: "20px", fontSize: "15px" }}>
             دانش آموزان عزیز، شما میتوانید از طریق راه های ارتباطی الورتبه، از
             اخرین اخبار و امکانات اکادمی مطلع شوید.
@@ -60,16 +61,16 @@ export const Footer = () => {
               <div className={"snip1472"}>
                 <TelegramIcon className={classes.sizeIcon} />
               </div>
-              <a href="https://t.me/" style={{ color: "#fff" }}>
+              <a href="https://t.me/alorotbe_konkoor" style={{ color: "#fff" }}>
                 <ListItemText primary="کانال تلگرام" />
               </a>
             </ListItem>
-
+          
             <ListItem style={{ padding: "0" }}>
               <div className={"snip1472"}>
                 <InstagramIcon className={classes.sizeIcon} />
               </div>
-              <a href="https://instagram.com/" style={{ color: "#fff" }}>
+              <a href="https://www.instagram.com/alorotbe/" style={{ color: "#fff" }}>
                 <ListItemText primary="پیج اینستاگرام " />
               </a>
             </ListItem>
@@ -84,7 +85,8 @@ export const Footer = () => {
         className={classes.textContainer}
         justify="center"
       >
-        <Grid xs={12}>
+        {/*
+         <Grid xs={12}>
           <Typography>ارتباط با الورتبه</Typography>
           <Divider style={{ marginTop: "5px", color: "#fff" }} />
         </Grid>
@@ -121,6 +123,9 @@ export const Footer = () => {
             </ListItem>
           </List>
         </Grid>
+        */}
+       
+        
       </Grid>
       <Grid
         item
