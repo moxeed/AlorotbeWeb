@@ -16,7 +16,7 @@ import {
   Select,
 } from "@material-ui/core";
 import { Typography, StepLabel, Step, Stepper } from "@material-ui/core";
-import { MenuItem, Paper } from "material-ui";
+import { CircularProgress, MenuItem, Paper } from "material-ui";
 import React, { useState, FC, FormEvent, useEffect, useContext } from "react";
 import { PostData, GetData } from "../../Services/ApiService";
 import SignIn from "../../Assets/SignIn.png";
@@ -25,6 +25,7 @@ import { toast } from "react-toastify";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { IdentityContext } from "../../App";
+import { FlightTakeoffSharp } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -105,6 +106,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
   const [supporters, setSupporters] = useState(
     [] as Array<{ id: number; name: string; lastName: string }>
   );
+  const [isProcessing, setIsProcessing] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
@@ -252,7 +254,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             </Grid>
             <Grid>
               <FormControl className={classes.fullWidth}>
-                <InputLabel className={classes.label}>استان محل سکونت</InputLabel>
+                <InputLabel className={classes.label}>شهر محل سکونت</InputLabel>
                 <Select
                   value={form.cityId}
                   name="cityId"
@@ -404,6 +406,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
       form.majorId !== 0 &&
       form.gradeId !== 0
     ) {
+      setIsProcessing(true);
       PostData("Identity/Register", form)
         .then((res) => {
           setIsDone(true);
@@ -419,7 +422,8 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             draggable: true,
             progress: undefined,
           });
-        });
+        })
+        .finally(() => setIsProcessing(false));
     } else {
       toast.warn("برخی فیلد های ضروری ناقص است", {
         position: "bottom-right",
@@ -477,11 +481,16 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                       </Button>
                     ) : (
                       <Button
+                        disabled={isProcessing}
                         className={"submitButton"}
                         onClick={() => handleSubmit()}
                         variant="contained"
                       >
-                        ثبت نام
+                        {isProcessing ? (
+                          <CircularProgress color="white" size={27} />
+                        ) : (
+                          "ثبت نام"
+                        )}
                       </Button>
                     )}
                   </div>

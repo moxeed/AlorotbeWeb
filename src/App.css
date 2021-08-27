@@ -43,13 +43,13 @@
   direction: rtl;
   box-sizing: border-box;
   font-family: main !important;
-  font-size: 22px;
+  font-size: 16px;
 }
 
 @font-face {
   font-family: main;
   font-weight: bolder;
-  src: url("./Assets/Koodak.ttf");
+  src: url("./Assets/Sahel.ttf");
 }
 
 .Fade-in {
