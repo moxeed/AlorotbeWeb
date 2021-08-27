@@ -80,8 +80,8 @@ const initValue: { [index: string]: any } = {
   name: "",
   lastName: "",
   phoneNumber: "",
-  avgLevel: null,
-  gpa: null,
+  avgLevel: "",
+  gpa: "",
   hasSupporter: false,
   cityId: 1,
   stateId: 1,
@@ -133,6 +133,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
   useEffect(() => {
     GetData("BasicInfo/City/" + form.stateId).then((res) => {
       setCity(res);
+      setForm({ ...form, cityId: res[0]?.id });
     });
   }, [form.stateId]);
 
@@ -406,6 +407,10 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
       form.majorId !== 0 &&
       form.gradeId !== 0
     ) {
+      const data = { ...form };
+      if (data.gpa == "") data.gpa = null;
+      if (data.avgLevel == "") data.avgLevel = null;
+
       setIsProcessing(true);
       PostData("Identity/Register", form)
         .then((res) => {

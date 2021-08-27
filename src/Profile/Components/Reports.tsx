@@ -8,9 +8,10 @@ import Paper from "@material-ui/core/Paper";
 import { CircularProgress } from "material-ui";
 import { useState, useEffect } from "react";
 import { GetData } from "../../Services/ApiService";
-import { Button } from "@material-ui/core";
+import { Button, Grid, TextField } from "@material-ui/core";
 import IModal from "../../Common/IModal";
 import { CourseStudies } from "./CourseStudies";
+import moment from "jalali-moment";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -33,18 +34,40 @@ const useStyles = makeStyles({
 export const Reports = () => {
   const classes = useStyles();
   const [reports, setReport] = useState<Array<any>>([]);
+  const [from, setFrom] = useState(
+    moment().locale("fa").add(-1, "w").format("YYYY/MM/DD")
+  );
+  const [to, setTo] = useState(moment().locale("fa").format("YYYY/MM/DD"));
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState<Array<any>>([]);
   useEffect(() => {
-    GetData("Planning/Study/10").then((res) => {
-      setReport(res);
-    });
-  }, []);
-  
+    GetData(`Planning/Study/10?startDateTime=${from}&endDateTime=${to}`).then(
+      (res) => {
+        setReport(res);
+      }
+    );
+  }, [from, to]);
+
   console.log(reports);
   return (
     <>
       <Paper className={classes.container}>
+        <Grid container>
+          <Grid xs={6}>
+            <TextField
+              label="از"
+              value={from}
+              onChange={(e) => setFrom((e.target as HTMLInputElement).value)}
+            />
+          </Grid>
+          <Grid xs={6}>
+            <TextField
+              label="تا"
+              value={to}
+              onChange={(e) => setTo((e.target as HTMLInputElement).value)}
+            />
+          </Grid>
+        </Grid>
         {reports ? (
           <Table aria-label="customized table">
             <TableHead>
