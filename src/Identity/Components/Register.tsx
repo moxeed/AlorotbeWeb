@@ -25,7 +25,6 @@ import { toast } from "react-toastify";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { IdentityContext } from "../../App";
-import { FlightTakeoffSharp } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -408,11 +407,11 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
       form.gradeId !== 0
     ) {
       const data = { ...form };
-      if (data.gpa == "") data.gpa = null;
-      if (data.avgLevel == "") data.avgLevel = null;
+      if (data.gpa === "") data.gpa = null;
+      if (data.avgLevel === "") data.avgLevel = 0;
 
       setIsProcessing(true);
-      PostData("Identity/Register", form)
+      PostData("Identity/Register", data)
         .then((res) => {
           setIsDone(true);
           setToken(res?.token);
