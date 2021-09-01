@@ -27,10 +27,7 @@ export const TopPage = () => {
       justify="center"
       style={{ marginTop: "150px", minHeight: "60vh" }}
     >
-      <Grid container justify="center">
-        <Grid xs={9} md={4} item>
-          <img src={StudentImage} style={{ width: "100%" }} alt="Students" />
-        </Grid>
+      <Grid container justify="center" style={{flexWrap:"wrap-reverse"}}>
         <Grid
           xs={12}
           md={5}
@@ -115,6 +112,9 @@ export const TopPage = () => {
               </Grid>
             </Grid>
           </Grid>
+        </Grid>
+        <Grid xs={9} md={4} item>
+          <img src={StudentImage} style={{ width: "100%" }} alt="Students" />
         </Grid>
       </Grid>
       <Grid xs={12} md={10} item>

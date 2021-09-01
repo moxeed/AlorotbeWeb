@@ -1,7 +1,7 @@
 import { SubmitWork } from "./Components/SubmitWork";
 import IModal from "../Common/IModal";
 import { useState } from "react";
-import { Button, Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { useEffect } from "react";
 import { GetData } from "../Services/ApiService";
 import CheckIcon from "@material-ui/icons/Check";
@@ -16,7 +16,7 @@ export const SubmitWorkButton = () => {
   return (
     <>
       {sent ? (
-        <div>
+        <div style={{display:"flex",alignItems:"center",marginTop:"12px"}}>
           <CheckIcon color="secondary" />
           ثبت شده
         </div>

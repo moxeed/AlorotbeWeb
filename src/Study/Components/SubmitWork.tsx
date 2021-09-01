@@ -57,7 +57,6 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
   const [awakeTime, setAwakeTime] = useState("");
   const [courses, setCourses] = useState([] as Array<Course>);
   const [isValid, setValid] = useState<boolean>(true);
-  
   let remainingCourses = courses.filter(
     (c) => courseStudies.filter((cs) => cs.courseId == c.id).length === 0
   );

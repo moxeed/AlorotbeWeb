@@ -31,11 +31,11 @@ export const MainBanner = () => {
     <>
       <div className={classes.root}>
         <div className={classes.intro}>
-          <Typography variant="h4" style={{ color: "#FD7D21" }}>
+          <Typography variant="h3" style={{ color: "#FD7D21" }}>
             الورتبه
           </Typography>
           <Typography
-            style={{ color: "#666666", fontSize: "15px", marginTop: "10px" }}
+            style={{ color: "#666666", fontSize: "18px", marginTop: "10px" }}
           >
             اینجا کنکور بهت خوش میگذره!
           </Typography>

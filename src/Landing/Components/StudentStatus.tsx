@@ -12,7 +12,7 @@ import { MyRank } from "./MyRank";
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
-    padding: "10px",
+    padding: "20px",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -56,12 +56,11 @@ export const StudentStatus = () => {
         <Grid item>
           <Typography style={{ textAlign: "right", padding: "20px" }}>
             {`
-              در این پنل میتونی گزارش روزانه خودت رو ثبت کنی و از روند پیشرفت خودت مطلع بشی!
+              در این پنل میتونی گزارش روزانه خودت رو ثبت کنی و از روند پیشرفت خودت مطلع بشی.
               همینطور رقابتی سالم با دوستای هم پایه خودت رو تجربه کنی!
                                             `}
           </Typography>
         </Grid>
-
         {isAuthenticated ? (
           <>
             <MyRank />

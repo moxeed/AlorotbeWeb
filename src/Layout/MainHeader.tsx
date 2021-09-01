@@ -8,10 +8,9 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { Link, NavLink, Route, Router, useHistory } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   Drawer,
-  Grid,
   Hidden,
   List,
   ListItem,
@@ -21,8 +20,6 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import { useState } from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import PhoneCallbackIcon from "@material-ui/icons/PhoneCallback";
 import { useContext } from "react";
 import { IdentityContext } from "../App";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';

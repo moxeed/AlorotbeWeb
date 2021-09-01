@@ -102,9 +102,6 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
     [] as Array<{ id: number; name: string }>
   );
   const [city, setCity] = useState([] as Array<{ id: number; name: string }>);
-  const [supporters, setSupporters] = useState(
-    [] as Array<{ id: number; name: string; lastName: string }>
-  );
   const [isProcessing, setIsProcessing] = useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -123,9 +120,6 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
     });
     GetData("BasicInfo/State").then((res) => {
       setStates(res);
-    });
-    GetData("Identity/Supporter").then((res) => {
-      setSupporters(res);
     });
   }, [isDone]);
 
@@ -355,15 +349,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
             </Grid>
             {String(form.hasSupporter) === "true" ? (
               <Grid>
-                <FormControl className={classes.fullWidth} required>
-                  <InputLabel className={classes.label}>نام مشاور</InputLabel>
-                  <Select
-                    value={+form.suppporterId}
-                    name="suppporterId"
-                    onChange={(e) => handleChangeInt(e)}
-                    style={{ textAlign: "right" }}
-                  ></Select>
-                  <FormControl className={classes.fullWidth}>
+                <FormControl className={classes.fullWidth} required>              
                     <InputLabel className={classes.label}>نام مشاور</InputLabel>
                     <Input
                       onChange={handleChangeString}
@@ -371,7 +357,6 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
                       value={form.supporterName}
                       name="supporterName"
                     />
-                  </FormControl>
                 </FormControl>
               </Grid>
             ) : null}
@@ -404,12 +389,23 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
       form.lastName !== "" &&
       form.phoneNumber !== "" &&
       form.majorId !== 0 &&
-      form.gradeId !== 0
+      form.gradeId !== 0 
     ) {
+      if(form.hasSupporter === true && form.supporterName === "")  {
+        toast.warn("نام مشاور را وارد کنید", {
+          position: "bottom-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }else
+      {
       const data = { ...form };
       if (data.gpa === "") data.gpa = null;
-      if (data.avgLevel === "") data.avgLevel = 0;
-
+      if (data.avgLevel === "") data.avgLevel = null;
       setIsProcessing(true);
       PostData("Identity/Register", data)
         .then((res) => {
@@ -428,6 +424,7 @@ export const Register: FC<Props> = ({ isDone, setIsDone, ...props }) => {
           });
         })
         .finally(() => setIsProcessing(false));
+      }
     } else {
       toast.warn("برخی فیلد های ضروری ناقص است", {
         position: "bottom-right",

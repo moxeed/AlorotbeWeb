@@ -8,8 +8,8 @@ export const ITimePicker = (prop: {
   error: boolean | undefined;
   onChange: (time: string) => void;
 }) => {
-  const [hour, setHour] = useState<number>(1);
-  const [minute, setMinute] = useState<number>(1);
+  const [hour, setHour] = useState<number>(0);
+  const [minute, setMinute] = useState<number>(0);
   const [open, setOpen] = useState(false);
   const value = ("0" + hour).slice(-2) + ":" + ("0" + minute).slice(-2);
   return (
@@ -34,9 +34,9 @@ export const ITimePicker = (prop: {
               {[...new Array(60)].map((_, index) => (
                 <Button
                   style={{ width: "100%" }}
-                  onClick={() => setMinute(index + 1)}
+                  onClick={() => setMinute(index )}
                 >
-                  {index + 1}
+                  {index }
                 </Button>
               ))}
             </Grid>
@@ -45,12 +45,12 @@ export const ITimePicker = (prop: {
               container
               style={{ overflowY: "auto", height: 200, width: 150 }}
             >
-              {[...new Array(23)].map((_, index) => (
+              {[...new Array(24)].map((_, index) => (
                 <Button
                   style={{ width: "100%" }}
-                  onClick={() => setHour(index + 1)}
+                  onClick={() => setHour(index )}
                 >
-                  {index + 1}
+                  {index }
                 </Button>
               ))}
             </Grid>

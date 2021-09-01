@@ -4,7 +4,6 @@ import { ListItem, ListItemText, List } from "@material-ui/core";
 import { Grid, makeStyles } from "@material-ui/core";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import InstagramIcon from "@material-ui/icons/Instagram";
-import PhoneIcon from "@material-ui/icons/Phone";
 import Divider from "@material-ui/core/Divider";
 import "./Footer.css";
 import { Typography } from "@material-ui/core";
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     background: "transparent !important",
   },
   sizeIcon: {
-    fontSize: "1rem",
+    fontSize: "1.5rem",
     paddingTop:"5px",
   },
 }));
@@ -33,7 +32,6 @@ export const Footer = () => {
       <Grid
         item
         xs={12}
-        md={6}
         container
         className={classes.textContainer}
         justify="center"
