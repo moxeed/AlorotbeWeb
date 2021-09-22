@@ -5,7 +5,7 @@ import { Reports } from "./Components/Reports";
 import { UserInfo } from "./Components/UserInfo";
 export const Profile = () => {
     return(
-        <Grid container style={{minHeight:"90vh",padding:"10rem 2rem 2rem 2rem"}} justify="center" alignItems="center">
+        <Grid container style={{minHeight:"90vh",padding:"10rem 0.5rem 2rem 0.5rem"}} justify="center" alignItems="center">
             <Grid container style={{flexWrap:"wrap-reverse"}} item xs={12}  md={10} justify="center" alignItems="center" >
                 <Grid container item xs={12} md={5} justify="center" alignItems="center" >
                     <Grid item xs={12}>
@@ -21,7 +21,7 @@ export const Profile = () => {
                         <Process/>
                     </Grid>
                 </Grid>
-            <Grid item xs={12} md={8} container justify="center" alignItems="center" >
+            <Grid item xs={12} md={10} container justify="center" alignItems="center" >
                  <Reports/>
             </Grid>
         </Grid>

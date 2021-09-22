@@ -162,6 +162,7 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
         });
       });
   };
+    const inputP = {maxLength: 3}
 
   const classes = useStyles();
   return (
@@ -261,11 +262,17 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
             <Grid xs={3}>
               <TextField
                 error={s.testCount === null && !isValid}
-                onChange={(e) => handleTestCountChange(e, index)}
                 label="تعداد تست"
                 value={s.testCount}
+                onChange={(e) =>{
+                    const rate = +(e.target as HTMLInputElement).value;
+                    if (rate >= 0 && rate <= 1000)
+                    handleTestCountChange(e, index);
+                  }
+                }
                 type="number"
                 fullWidth
+                inputProps={inputP}
               />
             </Grid>
           </Grid>

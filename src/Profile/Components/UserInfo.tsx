@@ -40,7 +40,7 @@ export const UserInfo = () => {
             </ListItem>
             <ListItem>
               <ListItemAvatar>
-                <Avatar style={{ backgroundColor: "#FD7D21" }}>
+                <Avatar style={{ backgroundColor: "#FD7D21",minWidth:"40px" }}>
                   <InfoIcon />
                 </Avatar>
               </ListItemAvatar>
@@ -51,7 +51,7 @@ export const UserInfo = () => {
             </ListItem>
             <ListItem>
               <ListItemAvatar>
-                <Avatar style={{ backgroundColor: "#FD7D21" }}>
+                <Avatar style={{ backgroundColor: "#FD7D21",minWidth:"40px" }}>
                   <SchoolIcon />
                 </Avatar>
               </ListItemAvatar>
@@ -65,7 +65,7 @@ export const UserInfo = () => {
             </ListItem>
             <ListItem>
               <ListItemAvatar>
-                <Avatar style={{ backgroundColor: "#FD7D21" }}>
+                <Avatar style={{ backgroundColor: "#FD7D21",minWidth:"40px" }}>
                   <CallIcon />
                 </Avatar>
               </ListItemAvatar>
