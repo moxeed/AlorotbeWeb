@@ -45,7 +45,7 @@ export const ITimePicker = (prop: {
               container
               style={{ overflowY: "auto", height: 200, width: 150 }}
             >
-              {[...new Array(24)].map((_, index) => (
+              {[...new Array(15)].map((_, index) => (
                 <Button
                   style={{ width: "100%" }}
                   onClick={() => setHour(index )}

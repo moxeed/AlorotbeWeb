@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import { GetData } from "../../Services/ApiService";
@@ -32,7 +32,8 @@ export const Process = () => {
       }
     );
   }, [month]);
-  const data = {
+
+  const testData = {
     labels: info.map((item: any) => item.date),
     datasets: [
       {
@@ -43,6 +44,12 @@ export const Process = () => {
         borderColor: "#FD7D21",
         yAxisID: "y-axis",
       },
+    ]
+  }
+
+  const data = {
+    labels: info.map((item: any) => item.date),
+    datasets: [
       {
         label: "مجموع زمان مطالعه",
         data: info.map((item: any) => item.studyMinute),
@@ -79,6 +86,7 @@ export const Process = () => {
         </Select>
       </FormGroup>
       <Line data={data} options={options} />
+      <Line data={testData} options={options} />
     </>
   );
 };

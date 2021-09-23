@@ -124,6 +124,15 @@ export const SubmitWork = (prop: { onFinish: () => void }) => {
       return;
     }
 
+    const sum = courseStudies.reduce((prev, curr) => {
+      return prev + parseInt(curr.studyTime.substring(0, 2)) * 60 + parseInt(curr.studyTime.substring(3, 5));
+    }, 0);
+
+    if (sum > 15 * 60){
+      toast.error('مجموع ساعت مطالعه باید کمتر از 15 باشد');
+      return;
+    }
+
     if (
       courseStudies.filter((c) => c.testCount === null || c.studyTime === "")
         .length > 0
